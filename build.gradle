@@ -34,7 +34,7 @@ dependencies {
     jooqGenerator 'org.postgresql:postgresql:42.2.18'
 
     implementation 'com.zaxxer:HikariCP:4.0.2'
-    implementation 'org.jooq:jooq:3.14.7'
+    implementation 'org.jooq:jooq:3.16.3'
 }
 
 jooq {
