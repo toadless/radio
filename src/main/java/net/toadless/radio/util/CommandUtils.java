@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.requests.RestAction;
 import net.toadless.radio.Radio;
+import net.toadless.radio.objects.cache.GuildSettingsCache;
 import net.toadless.radio.objects.command.CommandEvent;
 
 public class CommandUtils
@@ -15,10 +16,10 @@ public class CommandUtils
         // Override the default, public, constructor
     }
 
-//    public static boolean isValidCommand(String message, long guildId, Monke monke)
-//    {
-//        return message.startsWith(GuildSettingsCache.getCache(guildId, monke).getPrefix()) || message.startsWith("<@" + monke.getSelfUser().getId() + ">") || message.startsWith("<@!" + monke.getSelfUser().getId() + ">");
-//    }
+    public static boolean isValidCommand(String message, long guildId, Radio radio)
+    {
+        return message.startsWith(GuildSettingsCache.getCache(guildId, radio).getPrefix()) || message.startsWith("<@" + radio.getSelfUser().getId() + ">") || message.startsWith("<@!" + radio.getSelfUser().getId() + ">");
+    }
 
     public static void interactionCheck(User user1, User user2, CommandEvent ctx, Runnable onSuccess)
     {
