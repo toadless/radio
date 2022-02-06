@@ -1,7 +1,6 @@
 
 # project files
-*.cfg
-/config
+bot.cfg
 
 # eclipse files
 .classpath

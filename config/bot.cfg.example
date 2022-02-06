@@ -1,0 +1,6 @@
+token=TOKEN
+privilegedusers=USER_ID
+dburl=jdbc:postgresql://ADDRESS:PORT/NAME
+dbpassword=PASSWORD
+dbusername=USERNAME
+dbdriver=org.postgresql.Driver
