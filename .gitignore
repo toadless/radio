@@ -1,0 +1,24 @@
+
+# project files
+*.cfg
+/config
+
+# eclipse files
+.classpath
+.project
+.settings/
+/bin/
+
+# intellij files
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+#maven folder
+/target/
+
+#gradle
+build/
+.gradle
+gradle.properties
