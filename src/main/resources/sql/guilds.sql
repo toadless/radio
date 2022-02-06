@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS guilds
+(
+    guild_id BIGINT NOT NULL PRIMARY KEY,
+    dj_role BIGINT NOT NULL DEFAULT -1,
+    prefix VARCHAR(5) NOT NULL DEFAULT 'r!'
+);
