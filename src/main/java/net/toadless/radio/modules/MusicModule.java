@@ -133,21 +133,27 @@ public class MusicModule extends Module
             @Override
             public void playlistLoaded(AudioPlaylist playlist)
             {
-                if (playlist.isSearchResult())
+                try
                 {
-                    AudioTrack track = playlist.getTracks().get(0);
-                    if (manager.isPlaying())
+                    if (playlist.isSearchResult())
                     {
-                        event.replySuccess("Added **" + track.getInfo().title + "** to the queue.");
+                        AudioTrack track = playlist.getTracks().get(0);
+                        if (manager.isPlaying())
+                        {
+                            event.replySuccess("Added **" + track.getInfo().title + "** to the queue.");
+                        }
+                        manager.play(channel, track, event.getAuthor()); //Safe due to CommandChecks
                     }
-                    manager.play(channel, track, event.getAuthor()); //Safe due to CommandChecks
+                    else
+                    {
+                        event.replySuccess("Added " + playlist.getTracks().size() + " tracks to the queue.");
+                        manager.playAll(channel, playlist.getTracks(), event.getAuthor()); //Safe due to CommandChecks
+                    }
                 }
-                else
+                catch (IndexOutOfBoundsException exception)
                 {
-                    event.replySuccess("Added " + playlist.getTracks().size() + " tracks to the queue.");
-                    manager.playAll(channel, playlist.getTracks(), event.getAuthor()); //Safe due to CommandChecks
+                    failure.accept(new CommandResultException("Couldn't find anything matchsing your query."));
                 }
-
             }
 
             @Override

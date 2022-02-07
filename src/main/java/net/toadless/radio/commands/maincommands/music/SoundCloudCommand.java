@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SuppressWarnings ("unused")
-public class PlayCommand extends Command
+public class SoundCloudCommand extends Command
 {
-    public PlayCommand()
+    public SoundCloudCommand()
     {
-        super("Play", "Plays music from Youtube, or Spotify.", "[song]");
-        addAliases("play");
+        super("Soundcloud", "Plays music from Soundcloud.", "[song]");
+        addAliases("soundcloud", "sc");
         addFlags(CommandFlag.GUILD_ONLY);
     }
 
@@ -38,6 +38,6 @@ public class PlayCommand extends Command
         String query = String.join("", args);
 
         manager.bind(event.getChannel());
-        musicModule.play(manager, query, failure, event, SearchEngine.YOUTUBE); // if spotify will be overridden
+        musicModule.play(manager, query, failure, event, SearchEngine.SOUNDCLOUD); // if spotify will be overridden
     }
 }
