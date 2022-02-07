@@ -193,7 +193,7 @@ public class CommandModule extends Module
 
         cmd.getChildren()
                 .stream()
-                .filter(child -> child.getName().equalsIgnoreCase(args.get(0)))
+                .filter(child -> child.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(args.get(0))))
                 .findFirst()
                 .ifPresentOrElse(
                         child -> child.process(new CommandEvent(event, radio, child, args.subList(1, args.size()))),
