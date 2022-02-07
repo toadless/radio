@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.exception.*;
+import net.toadless.radio.objects.music.GuildMusicManager;
 
 public class CommandChecks
 {
@@ -191,15 +192,15 @@ public class CommandChecks
         return false;
     }
 
-//    public static boolean boundToChannel(GuildMusicManager handler, MessageChannel channel, Consumer<CommandException> callback)
-//    {
-//        if (handler.getChannel() != null && handler.getChannel().getIdLong() != channel.getIdLong())
-//        {
-//            callback.accept(new CommandResultException("I'm bound to " + StringUtils.getChannelAsMention(handler.getChannel().getIdLong()) + " for this session."));
-//            return true;
-//        }
-//        return false;
-//    }
+    public static boolean boundToChannel(GuildMusicManager handler, MessageChannel channel, Consumer<CommandException> callback)
+    {
+        if (handler.getChannel() != null && handler.getChannel().getIdLong() != channel.getIdLong())
+        {
+            callback.accept(new CommandResultException("I'm bound to " + StringUtils.getChannelAsMention(handler.getChannel().getIdLong()) + " for this session."));
+            return true;
+        }
+        return false;
+    }
 
     public static boolean isURL(String url)
     {

@@ -1,5 +1,9 @@
 token=TOKEN
 privilegedusers=USER_ID
+
+spotifyid=
+spotifysecret=
+
 dburl=jdbc:postgresql://ADDRESS:PORT/NAME
 dbpassword=PASSWORD
 dbusername=USERNAME

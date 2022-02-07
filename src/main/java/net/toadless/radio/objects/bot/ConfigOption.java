@@ -5,6 +5,9 @@ public enum ConfigOption
     TOKEN("token", "token"),
     PRIVILEGEDUSERS("privilegedusers", "0000000000000, 0000000000000"),
 
+    SPOTIFYID("spotifyid", "spotifyid"),
+    SPOTIFYSECRET("spotifysecret", "spotifysecret"),
+
     DBUSERNAME("dbusername", "username"),
     DBPASSWORD("dbpassword", "password"),
     DBDRIVER("dbdriver", "org.postgresql.Driver"),

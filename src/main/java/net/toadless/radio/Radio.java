@@ -13,7 +13,6 @@ import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import net.toadless.radio.modules.TaskModule;
 import net.toadless.radio.objects.bot.ConfigOption;
 import net.toadless.radio.objects.bot.Configuration;
 import net.toadless.radio.objects.bot.EventWaiter;
@@ -126,7 +125,7 @@ public class Radio extends ListenerAdapter
         getLogger().info("Radio Version:   " + Constants.VERSION);
         getLogger().info("JVM Version:     " + BotInfo.getJavaVersion());
 
-        this.modules.get(TaskModule.class).addRepeatingTask(() -> switchStatus(event.getJDA()), TimeUnit.MINUTES, 2);
+        modules.addRepeatingTask(() -> switchStatus(event.getJDA()), TimeUnit.MINUTES, 2);
     }
 
     public SelfUser getSelfUser()
