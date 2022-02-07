@@ -2,11 +2,16 @@ package net.toadless.radio.modules;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.events.guild.UnavailableGuildLeaveEvent;
 import net.toadless.radio.Radio;
 import net.toadless.radio.objects.bot.ConfigOption;
 import net.toadless.radio.objects.bot.Configuration;
+import net.toadless.radio.objects.cache.GuildSettingsCache;
 import net.toadless.radio.objects.module.Module;
 import net.toadless.radio.objects.module.Modules;
+import net.toadless.radio.util.DatabaseUtils;
 import net.toadless.radio.util.IOUtils;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -116,5 +121,25 @@ public class DatabaseModule extends Module
     {
         LOGGER.debug("Closed local database.");
         pool.close();
+    }
+
+    @Override
+    public void onGuildLeave(GuildLeaveEvent event)
+    {
+        DatabaseUtils.removeGuild(event.getGuild(), radio);
+        GuildSettingsCache.removeCache(event.getGuild().getIdLong());
+    }
+
+    @Override
+    public void onUnavailableGuildLeave(UnavailableGuildLeaveEvent event)
+    {
+        DatabaseUtils.removeGuild(event.getGuildIdLong(), radio);
+        GuildSettingsCache.removeCache(event.getGuildIdLong());
+    }
+
+    @Override
+    public void onGuildJoin(GuildJoinEvent event)
+    {
+        DatabaseUtils.registerGuild(event.getGuild(), radio);
     }
 }
