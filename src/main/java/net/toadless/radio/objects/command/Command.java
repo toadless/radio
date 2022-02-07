@@ -124,6 +124,10 @@ public abstract class Command
             {
                 event.replyError("`" + exception.getText() + "` is not setup.");
             }
+            else if (exception instanceof CommandUserRolesException)
+            {
+                event.replyError("You do not the required role to run this command. `" + exception.getText() + "` ");
+            }
             else
             {
                 event.replyError(exception.getText());

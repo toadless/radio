@@ -8,10 +8,12 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.toadless.radio.Radio;
+import net.toadless.radio.objects.cache.GuildSettingsCache;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.exception.CommandException;
 import net.toadless.radio.objects.exception.CommandResultException;
@@ -26,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class MusicModule extends Module
 {
@@ -95,6 +98,15 @@ public class MusicModule extends Module
         manager.getPlayer().destroy();
         manager.leave(guild);
         manager.getScheduler().clear();
+    }
+
+    public boolean isUserDj(CommandEvent event)
+    {
+        GuildSettingsCache guildSettingsCache = GuildSettingsCache.getCache(event.getGuildIdLong(), radio);
+        long djRole = guildSettingsCache.getDjRole();
+
+        if (djRole == -1L) return true; // return true if dj role not setup
+        else return event.getMember().getRoles().stream().anyMatch(role -> role.getIdLong() == djRole);
     }
 
     public void play(GuildMusicManager manager, String query, Consumer<CommandException> failure, CommandEvent event, SearchEngine searchEngine)

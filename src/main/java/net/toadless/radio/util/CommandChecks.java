@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.toadless.radio.modules.MusicModule;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.exception.*;
 import net.toadless.radio.objects.music.GuildMusicManager;
@@ -59,6 +60,18 @@ public class CommandChecks
         else if (!selfState.inVoiceChannel())
         {
             callback.accept(new CommandResultException("I am not in a voice channel."));
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isUserDj(CommandEvent event, Consumer<CommandException> callback)
+    {
+        MusicModule musicModule = event.getRadio().getModules().get(MusicModule.class);
+
+        if (!musicModule.isUserDj(event))
+        {
+            callback.accept(new CommandUserRolesException("You do not have the DJ role!"));
             return true;
         }
         return false;

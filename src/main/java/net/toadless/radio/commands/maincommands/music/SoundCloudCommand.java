@@ -33,6 +33,7 @@ public class SoundCloudCommand extends Command
         if (CommandChecks.argsEmpty(event, failure)) return;
         if (CommandChecks.sharesVoice(event, failure)) return;
         if (CommandChecks.boundToChannel(manager, event.getChannel(), failure)) return;
+        if (CommandChecks.isUserDj(event, failure)) return;
 
         VoiceChannel channel = event.getMember().getVoiceState().getChannel(); //Safe due to CommandChecks
         String query = String.join("", args);

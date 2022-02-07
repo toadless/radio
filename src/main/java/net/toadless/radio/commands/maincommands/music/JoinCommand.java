@@ -30,6 +30,7 @@ public class JoinCommand extends Command
 
         if (CommandChecks.sharesVoice(event, failure)) return;
         if (CommandChecks.boundToChannel(manager, event.getChannel(), failure)) return;
+        if (CommandChecks.isUserDj(event, failure)) return;
 
         VoiceChannel channel = event.getMember().getVoiceState().getChannel();
         manager.join(channel);

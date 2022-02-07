@@ -31,6 +31,7 @@ public class LeaveCommand extends Command
         if (CommandChecks.sharesVoice(event, failure)) return;
         if (CommandChecks.boundToChannel(manager, event.getChannel(), failure)) return;
         if (CommandChecks.inVoice(event, failure)) return;
+        if (CommandChecks.isUserDj(event, failure)) return;
 
         manager.getPlayer().destroy();
         manager.leave(event.getGuild());

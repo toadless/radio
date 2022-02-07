@@ -29,6 +29,7 @@ public class WipeCommand extends Command
 
         if (CommandChecks.boundToChannel(manager, event.getChannel(), failure)) return;
         if (CommandChecks.sharesVoice(event, failure)) return;
+        if (CommandChecks.isUserDj(event, failure)) return;
 
         manager.getScheduler().clear();
 

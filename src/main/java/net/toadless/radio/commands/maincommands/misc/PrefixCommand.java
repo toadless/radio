@@ -26,6 +26,7 @@ public class PrefixCommand extends Command
         addFlags(CommandFlag.GUILD_ONLY);
         addAliases("prefix");
         addChildren(new PrefixResetCommand(this));
+        addMemberPermissions(Permission.MANAGE_SERVER);
     }
 
     @Override
@@ -33,7 +34,6 @@ public class PrefixCommand extends Command
     {
         MessageChannel channel = event.getChannel();
         GuildSettingsCache config = GuildSettingsCache.getCache(event.getGuildIdLong(), event.getRadio());
-
 
         if (args.isEmpty())
         {
