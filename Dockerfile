@@ -1,4 +1,4 @@
 FROM openjdk:15-jdk
-WORKDIR /home/monkebot/
+WORKDIR /home/radio/
 COPY build/libs/Radio-all.jar Radio.jar
 ENTRYPOINT java -jar Radio.jar
