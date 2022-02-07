@@ -13,12 +13,12 @@ import net.toadless.radio.util.CommandChecks;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings ("unused")
-public class PauseCommand extends Command
+public class StopCommand extends Command
 {
-    public PauseCommand()
+    public StopCommand()
     {
-        super("Pause", "Pauses the music player.", "[none]");
-        addAliases("pause");
+        super("Stop", "Stops the music player.", "[none]");
+        addAliases("stop", "end");
         addFlags(CommandFlag.GUILD_ONLY);
     }
 
@@ -31,7 +31,8 @@ public class PauseCommand extends Command
         if (CommandChecks.boundToChannel(manager, event.getChannel(), failure)) return;
         if (CommandChecks.sharesVoice(event, failure)) return;
 
-        manager.togglePause();
-        event.replySuccess(manager.getPaused() ? "Paused the player." : "Unpaused the player.");
+        manager.getScheduler().clear();
+        manager.getPlayer().destroy();
+        event.replySuccess("Stopped the player!");
     }
 }
