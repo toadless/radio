@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 
 public class DjSetCommand extends Command
 {
+
     public DjSetCommand(Command parent)
     {
         super(parent, "Set", "Sets the DJ role.", "[role]");
