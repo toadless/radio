@@ -115,4 +115,9 @@ public class GuildMusicManager
         this.volume = volume;
         player.setVolume(volume);
     }
+
+    public void unbind()
+    {
+        this.channel = null;
+    }
 }

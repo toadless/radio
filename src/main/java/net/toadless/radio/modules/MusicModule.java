@@ -85,6 +85,7 @@ public class MusicModule extends Module
                 manager.getPlayer().destroy();
                 manager.leave(guild);
                 manager.getScheduler().clear();
+                manager.unbind();
             }
         });
     }
@@ -98,6 +99,7 @@ public class MusicModule extends Module
         manager.getPlayer().destroy();
         manager.leave(guild);
         manager.getScheduler().clear();
+        manager.unbind();
     }
 
     public boolean isUserDj(CommandEvent event)
