@@ -2,7 +2,7 @@ plugins{
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
-    id 'nu.studer.jooq' version '5.2.1'
+    id 'nu.studer.jooq' version '7.1.1'
 }
 mainClassName = 'net.toadless.radio.Main'
 sourceCompatibility = 14
