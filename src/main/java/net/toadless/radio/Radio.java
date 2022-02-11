@@ -164,14 +164,12 @@ public class Radio extends ListenerAdapter
         }
 
         List<Activity> status = List.of(
-                Activity.watching(BotInfo.getGuildCount(manager) + StringUtils.plurify(" server", (int) BotInfo.getGuildCount(manager))),
-                Activity.watching(BotInfo.getUserCount(manager) + StringUtils.plurify("  user", (int) BotInfo.getUserCount(manager))),
-                Activity.watching("the kids"),
-                Activity.listening("your commands"),
                 Activity.listening(Constants.DEFAULT_BOT_PREFIX + "help"),
-                Activity.playing("forknife!!!!"),
-                Activity.playing("with your feelings"),
-                Activity.competing("the race to 100 servers")
+                Activity.playing("music"),
+                Activity.playing("dank tunes"),
+                Activity.competing("best dj"),
+                Activity.listening("music"),
+                Activity.watching("you suck at being a dj")
         );
 
         jda.getPresence().setPresence(OnlineStatus.ONLINE, status.get(new Random().nextInt(status.size())));
