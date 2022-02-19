@@ -3,13 +3,17 @@ package net.toadless.radio.objects.music;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+
+import java.time.Instant;
 import java.util.List;
 import javax.annotation.Nullable;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.managers.AudioManager;
+import net.toadless.radio.Constants;
+import net.toadless.radio.objects.Emoji;
+import net.toadless.radio.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class GuildMusicManager
@@ -17,6 +21,7 @@ public class GuildMusicManager
     private final AudioPlayer player;
     private final TrackScheduler scheduler;
     private MessageChannel channel;
+    private long controllerId;
     private int volume = 30;
 
     public GuildMusicManager(AudioPlayerManager manager)
@@ -65,6 +70,38 @@ public class GuildMusicManager
         manager.openAudioConnection(channel);
         tracks.forEach(track -> scheduler.queue(track, user));
         player.setVolume(volume);
+    }
+
+    public void sendController(MessageEmbed embed)
+    {
+        removeOldController();
+
+        getChannel().sendMessageEmbeds(embed).queue(message ->
+        {
+            setControllerId(message.getIdLong());
+
+            message.addReaction(Emoji.PLAY_PAUSE.getAsReaction()).queue();
+            message.addReaction(Emoji.ARROW_RIGHT.getAsReaction()).queue();
+            message.addReaction(Emoji.VOLUME_UP.getAsReaction()).queue();
+            message.addReaction(Emoji.VOLUME_DOWN.getAsReaction()).queue();
+            message.addReaction(Emoji.SHUFFLE.getAsReaction()).queue();
+            message.addReaction(Emoji.CROSS.getAsReaction()).queue();
+        }, error ->
+        {
+            bind(null);
+            setControllerId(-1L);
+        });
+    }
+
+    public void removeOldController()
+    {
+        if (getControllerId() == -1L) return;
+
+        try
+        {
+            getChannel().retrieveMessageById(getControllerId()).queue(message -> message.delete().queue(msg -> {}, throwable -> {}), throwable -> {});
+        } catch (Exception ignored)
+        {}
     }
 
     public void togglePause()
@@ -119,5 +156,15 @@ public class GuildMusicManager
     public void unbind()
     {
         this.channel = null;
+    }
+
+    public long getControllerId()
+    {
+        return controllerId;
+    }
+
+    public void setControllerId(long controllerId)
+    {
+        this.controllerId = controllerId;
     }
 }

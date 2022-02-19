@@ -18,6 +18,12 @@ public enum Emoji
     SUCCESS(":white_check_mark:"),
     FAILURE(":negative_squared_cross_mark:"),
 
+    VOLUME_DOWN(":sound:", "\uD83D\uDD09"),
+    VOLUME_UP(":loud_sound:", "\uD83D\uDD0A"),
+    PLAY_PAUSE(":play_pause:", "\u23EF"),
+    SHUFFLE(":twisted_rightwards_arrows:", "\uD83D\uDD00"),
+    CROSS(":x:", "\u274C"),
+
     ZERO(":zero:", "\u0030\uFE0F"),
     ONE(":one:", "\u0031\uFE0F"),
     TWO(":two:", "\u0032\uFE0F"),

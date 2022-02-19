@@ -71,7 +71,7 @@ public class TrackScheduler extends AudioEventAdapter
 
         if (handler != null && handler.getChannel() != null)
         {
-            handler.getChannel().sendMessageEmbeds(new EmbedBuilder()
+            handler.sendController(new EmbedBuilder()
                     .setTitle("Now playing")
                     .setDescription(
                             "[" + track.getInfo().title + "](" + track.getInfo().uri + ")" +
@@ -81,7 +81,7 @@ public class TrackScheduler extends AudioEventAdapter
                                     "\n**Requested by**: " + track.getUserData(User.class).getAsMention())
                     .setColor(Constants.EMBED_COLOUR)
                     .setTimestamp(Instant.now())
-                    .build()).queue(null, error -> handler.bind(null));
+                    .build());
         }
     }
 
