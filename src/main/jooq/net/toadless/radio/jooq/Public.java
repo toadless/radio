@@ -47,7 +47,8 @@ public class Public extends SchemaImpl {
 
     @Override
     public final List<Table<?>> getTables() {
-        return Arrays.<Table<?>>asList(
-            Guilds.GUILDS);
+        return Arrays.asList(
+            Guilds.GUILDS
+        );
     }
 }

@@ -181,4 +181,17 @@ public class GuildsRecord extends UpdatableRecordImpl<GuildsRecord> implements R
         setDjRole(djRole);
         setPrefix(prefix);
     }
+
+    /**
+     * Create a detached, initialised GuildsRecord
+     */
+    public GuildsRecord(net.toadless.radio.jooq.tables.pojos.Guilds value) {
+        super(Guilds.GUILDS);
+
+        if (value != null) {
+            setGuildId(value.getGuildId());
+            setDjRole(value.getDjRole());
+            setPrefix(value.getPrefix());
+        }
+    }
 }

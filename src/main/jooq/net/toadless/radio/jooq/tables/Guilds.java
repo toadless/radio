@@ -4,9 +4,6 @@
 package net.toadless.radio.jooq.tables;
 
 
-import java.util.Arrays;
-import java.util.List;
-
 import net.toadless.radio.jooq.Keys;
 import net.toadless.radio.jooq.Public;
 import net.toadless.radio.jooq.tables.records.GuildsRecord;
@@ -97,17 +94,12 @@ public class Guilds extends TableImpl<GuildsRecord> {
 
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return aliased() ? null : Public.PUBLIC;
     }
 
     @Override
     public UniqueKey<GuildsRecord> getPrimaryKey() {
         return Keys.GUILDS_PKEY;
-    }
-
-    @Override
-    public List<UniqueKey<GuildsRecord>> getKeys() {
-        return Arrays.<UniqueKey<GuildsRecord>>asList(Keys.GUILDS_PKEY);
     }
 
     @Override
