@@ -11,11 +11,13 @@ plugins {
     id ("nu.studer.jooq") version ("7.1.1")
 }
 
-val mainClassName = "net.toadless.radio.Main"
+var mainClassName = "net.toadless.radio.Main"
 
 val RADIO_DB_USER: String by project
 val RADIO_DB_PASSWORD: String by project
 val RADIO_DB_URL: String by project
+
+project.setProperty("mainClassName", mainClassName)
 
 java {
     sourceCompatibility = JavaVersion.VERSION_14
@@ -51,22 +53,6 @@ dependencies {
 
     implementation ("com.zaxxer:HikariCP:5.0.1")
     implementation ("org.jooq:jooq:3.16.4")
-}
-
-tasks {
-    named<ShadowJar>("shadowJar") {
-        archiveBaseName.set("shadow")
-        mergeServiceFiles()
-        manifest {
-            attributes(mapOf("Main-Class" to mainClassName))
-        }
-    }
-}
-
-tasks {
-    build {
-        dependsOn(shadowJar)
-    }
 }
 
 jooq {
