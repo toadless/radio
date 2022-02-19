@@ -46,7 +46,7 @@ dependencies {
     implementation ("com.sedmelluq:lavaplayer:1.3.78")
 
     //Database
-    implementation ("org.postgresql:postgresql:42.3.2")
+    implementation ("org.postgresql:postgresql:42.3.3")
     jooqGenerator ("org.postgresql:postgresql:42.3.2")
 
     implementation ("com.zaxxer:HikariCP:5.0.1")
