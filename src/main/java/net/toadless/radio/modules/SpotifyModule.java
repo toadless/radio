@@ -1,5 +1,6 @@
 package net.toadless.radio.modules;
 
+import com.neovisionaries.i18n.CountryCode;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.toadless.radio.Radio;
 import net.toadless.radio.objects.bot.ConfigOption;
@@ -65,6 +66,7 @@ public class SpotifyModule extends Module
             case "album" -> loadAlbum(identifier, failure, event, voiceChannel);
             case "track" -> loadTrack(identifier, failure, event, manager);
             case "playlist" -> loadPlaylist(identifier, failure, event, voiceChannel);
+            case "artist" -> loadArtist(identifier, failure, event, voiceChannel);
         }
     }
 
@@ -116,6 +118,25 @@ public class SpotifyModule extends Module
         }).exceptionally(throwable ->
         {
             failure.accept(new CommandResultException(throwable.getMessage().contains("Invalid playlist Id") ? "Playlist not found" : "There was an error while loading the playlist"));
+            return null;
+        });
+    }
+
+    private void loadArtist(String id, Consumer<CommandException> failure, CommandEvent event, VoiceChannel voiceChannel)
+    {
+        this.spotify.getArtistsTopTracks(id, CountryCode.SE).build().executeAsync().thenAcceptAsync(tracks ->
+        {
+            var toLoad = new ArrayList<String>();
+
+            for(var track : tracks)
+            {
+                toLoad.add("ytsearch:" + track.getArtists()[0].getName() + " " + track.getName());
+            }
+
+            loadTracks(event, toLoad, voiceChannel);
+        }).exceptionally(throwable ->
+        {
+            failure.accept(new CommandResultException(throwable.getMessage().contains("Invalid artist Id") ? "Artist not found" : "There was an error while loading the artist"));
             return null;
         });
     }

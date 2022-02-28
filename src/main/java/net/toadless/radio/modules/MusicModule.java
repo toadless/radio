@@ -16,7 +16,6 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.toadless.radio.Radio;
-import net.toadless.radio.objects.Emoji;
 import net.toadless.radio.objects.cache.GuildSettingsCache;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.exception.CommandException;
@@ -26,8 +25,6 @@ import net.toadless.radio.objects.module.Modules;
 import net.toadless.radio.objects.music.GuildMusicManager;
 import net.toadless.radio.objects.music.SearchEngine;
 import net.toadless.radio.objects.music.TrackScheduler;
-import net.toadless.radio.util.CommandChecks;
-import net.toadless.radio.util.CommandUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -36,14 +33,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import static net.toadless.radio.objects.Emoji.ARROW_RIGHT;
 
 public class MusicModule extends Module
 {
     public static final Pattern URL_PATTERN = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]?");
-    public static final Pattern SPOTIFY_URL_PATTERN = Pattern.compile("^(https?://)?(www\\.)?open\\.spotify\\.com/(user/[a-zA-Z0-9-_]+/)?(?<type>track|album|playlist)/(?<identifier>[a-zA-Z0-9-_]+)?.+");
+    public static final Pattern SPOTIFY_URL_PATTERN = Pattern.compile("^(https?://)?(www\\.)?open\\.spotify\\.com/(user/[a-zA-Z0-9-_]+/)?(?<type>track|album|artist|playlist)/(?<identifier>[a-zA-Z0-9-_]+)?.+");
 
     private final Map<Long, GuildMusicManager> musicHandlers;
     private final AudioPlayerManager playerManager;
