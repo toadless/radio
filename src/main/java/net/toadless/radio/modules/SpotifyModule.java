@@ -124,6 +124,7 @@ public class SpotifyModule extends Module
 
     private void loadArtist(String id, Consumer<CommandException> failure, CommandEvent event, VoiceChannel voiceChannel)
     {
+        // used SE because it was in the docs and all others dont work :/
         this.spotify.getArtistsTopTracks(id, CountryCode.SE).build().executeAsync().thenAcceptAsync(tracks ->
         {
             var toLoad = new ArrayList<String>();
