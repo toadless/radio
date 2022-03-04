@@ -6,7 +6,7 @@ Radio is a private Discord bot for playing music, it is highly powerful and conf
 
 ## Should I Run Radio Locally?
 
-Probably not. Radio has enough moving pieces that running a local version is complicated. The main purpose of having the source released is to allow others to understand and audit the functionality. The code is by no means meant to be easy to setup or bootstrap, and I don't plan on supporting folks trying to run locally. That said, feel free to run a local version of Radio for your server (but not a public version please).
+Probably not. Radio has enough moving pieces that running a local version is complicated. The main purpose of having the source released is to allow others to understand and audit the functionality. I don't plan on supporting folks trying to run locally. That said, feel free to run a local version of Radio for your server (but not a public version please).
 
 ### Self-hosting Agreement
 
