@@ -1,30 +1,24 @@
-<p align="center"> 
-    <img src="https://i.imgur.com/JCd2uRi.png" width="400">
-</p>
+# Radio
 
-[discord-invite]: https://discord.gg/SzQdJPbwrQ
+[![](https://discordapp.com/api/guilds/925386927794958348/embed.png?style=banner2)](https://discord.gg/JtXmRKuGGp)
 
-# 📻 Radio
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/toadless/radio/blob/main/LICENSE)
-[![Discord](https://discordapp.com/api/guilds/925386927794958348/widget.png)][discord-invite]
+Radio is a private Discord bot for playing music, it is highly powerful and configurable. Radio is built to feel like a premium experience.
 
-Radio is a feature-rich discord-music-bot with the right amount of features of any music bot. Also with a spotify module and a postgresql database.
+## Should I Run Radio Locally?
 
-Check it out and download the latest builds [over on the releases page!](https://github.com/toadless/radio/releases)
+Probably not. Radio has enough moving pieces that running a local version is complicated. The main purpose of having the source released is to allow others to understand and audit the functionality. The code is by no means meant to be easy to setup or bootstrap, and I don't plan on supporting folks trying to run locally. That said, feel free to run a local version of Radio for your server (but not a public version please).
 
-# 🔨 Building from source
-Radio uses Gradle to handle dependencies and building! Make sure you have Java 8 and Git, and then run:
-```
-git clone https://github.com/toadless/radio.git
-cd radio/
-./gradlew clean build
-```
-You can find the compiled JARs in the `build/libs` directory.
+### Self-hosting Agreement
 
-**Note: You will need to create the gradle.properties file to compile!**
+- You may not use the Radio logo or name within derivative bots.
+- You may not host a public version of Radio.
+- You may not charge for the usage of your instance of Radio.
+- You may not provide support for Radio.
 
-# 🎺 Contributing
-Feel free to create pull requests with any changes or improvements that think would make Radio a better music bot! Generally, try to keep core features intact. Pull requests with bugfixes are welcome!
+### Can I Contribute?
 
-# 📋 License
-Radio is licensed under the MIT license. View `LICENSE` for more information.
+Maybe. Feel free to submit PRs, but unless they are explicitly bug fixes that have good and clean code, I likely won't merge. Features will not be accepted through PR unless stated elsewhere. Do not submit feedback on this repository, the server is the right place for that.
+
+## Can You Add Radio To My Server?
+
+Maybe. If you are interested in having Radio on your server, please join [my server](https://discord.gg/JtXmRKuGGp).
