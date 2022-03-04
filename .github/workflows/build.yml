@@ -111,4 +111,4 @@ jobs:
           port: 22
           script: |
             cd ~/docker/radio
-            ./rebuild.sh
+            ./rebuild
