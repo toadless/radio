@@ -96,7 +96,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            frogg1t/radio:latest
+            toadlessss/radio:latest
             ghcr.io/toadless/radio:latest
 
 
