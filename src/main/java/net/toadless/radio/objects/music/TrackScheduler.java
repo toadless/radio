@@ -21,11 +21,15 @@ public class TrackScheduler extends AudioEventAdapter
     private final LinkedList<AudioTrack> queue;
     private final GuildMusicManager handler;
 
+    private boolean loop;
+
     public TrackScheduler(AudioPlayer player, GuildMusicManager handler)
     {
         this.player = player;
         this.queue = new LinkedList<>();
         this.handler = handler;
+
+        this.loop = false;
     }
 
     public void queue(AudioTrack track, User user)
@@ -59,7 +63,8 @@ public class TrackScheduler extends AudioEventAdapter
     {
         if (endReason.mayStartNext)
         {
-            skipOne();
+            if (loop) player.startTrack(track.makeClone(), false);
+            else skipOne();
         }
     }
 
@@ -112,5 +117,15 @@ public class TrackScheduler extends AudioEventAdapter
     public void shuffle()
     {
         Collections.shuffle(queue);
+    }
+
+    public void toggleLoop()
+    {
+        this.loop = !this.loop;
+    }
+
+    public boolean getLoop()
+    {
+        return this.loop;
     }
 }

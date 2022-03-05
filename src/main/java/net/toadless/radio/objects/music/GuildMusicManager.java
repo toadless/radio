@@ -85,6 +85,7 @@ public class GuildMusicManager
             message.addReaction(Emoji.VOLUME_UP.getAsReaction()).queue();
             message.addReaction(Emoji.VOLUME_DOWN.getAsReaction()).queue();
             message.addReaction(Emoji.SHUFFLE.getAsReaction()).queue();
+            message.addReaction(Emoji.REPEAT.getAsReaction()).queue();
             message.addReaction(Emoji.CROSS.getAsReaction()).queue();
         }, error ->
         {
@@ -151,6 +152,11 @@ public class GuildMusicManager
     {
         this.volume = volume;
         player.setVolume(volume);
+    }
+
+    public int getVolume()
+    {
+        return player.getVolume();
     }
 
     public void unbind()

@@ -22,6 +22,7 @@ public enum Emoji
     VOLUME_UP(":loud_sound:", "\uD83D\uDD0A"),
     PLAY_PAUSE(":play_pause:", "\u23EF"),
     SHUFFLE(":twisted_rightwards_arrows:", "\uD83D\uDD00"),
+    REPEAT(":repeat:", "\uD83D\uDD01"),
     CROSS(":x:", "\u274C"),
 
     ZERO(":zero:", "\u0030\uFE0F"),

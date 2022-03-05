@@ -8,10 +8,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
@@ -25,6 +22,7 @@ import net.toadless.radio.objects.module.Modules;
 import net.toadless.radio.objects.music.GuildMusicManager;
 import net.toadless.radio.objects.music.SearchEngine;
 import net.toadless.radio.objects.music.TrackScheduler;
+import net.toadless.radio.util.EmbedUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -110,18 +108,65 @@ public class MusicModule extends Module
 
         switch(event.getReactionEmote().getAsReactionCode())
         {
-            case "\u27A1\uFE0F" -> scheduler.skipOne();
-            case "\u23EF" -> manager.togglePause();
-            case "\uD83D\uDD00" -> scheduler.shuffle();
-            case "\uD83D\uDD09" -> manager.setVolume(manager.getPlayer().getVolume() - 10);
-            case "\uD83D\uDD0A" -> manager.setVolume(manager.getPlayer().getVolume() + 10);
-            case "\u274C" -> cleanupPlayer(event.getGuild());
+            case "\u27A1\uFE0F" -> skipFromController(manager, member);
+            case "\u23EF" -> togglePauseFromController(manager, member);
+            case "\uD83D\uDD00" -> shuffleFromController(manager, member);
+            case "\uD83D\uDD09" -> setVolumeFromController(manager, member, manager.getPlayer().getVolume() - 10);
+            case "\uD83D\uDD0A" -> setVolumeFromController(manager, member, manager.getPlayer().getVolume() + 10);
+            case "\uD83D\uDD01" -> toggleLoopingFromController(manager, member);
+            case "\u274C" -> cleanupPlayer(event.getGuild(), member.getAsMention() + " disconnected me.");
         }
 
         if(event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_MANAGE))
         {
             event.getReaction().removeReaction(event.getUser()).queue();
         }
+    }
+
+    private void skipFromController(GuildMusicManager manager, Member member)
+    {
+        manager.getScheduler().skipOne();
+
+        if (manager.getChannel() == null) return;
+        EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has skipped the track.");
+    }
+
+    private void togglePauseFromController(GuildMusicManager manager, Member member)
+    {
+        manager.togglePause();
+        boolean paused = manager.getPaused();
+
+        if (manager.getChannel() == null) return;
+        EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has " + (paused ? "paused" : "unpaused") + " the player.");
+    }
+
+    private void setVolumeFromController(GuildMusicManager manager, Member member, int volume)
+    {
+        int volBefore = manager.getVolume();
+        manager.setVolume(volume);
+        int volAfter = manager.getVolume();
+
+        String action = (volBefore > volAfter ? "decreased" : "increased");
+
+        if (manager.getChannel() == null) return;
+        EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has " + action + " the volume.");
+    }
+
+    private void toggleLoopingFromController(GuildMusicManager manager, Member member)
+    {
+        manager.getScheduler().toggleLoop();
+        boolean looping = manager.getScheduler().getLoop();
+
+        if (manager.getChannel() == null) return;
+        EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has " + (looping ? "enabled" : "disabled") + " looping.");
+    }
+
+    private void shuffleFromController(GuildMusicManager manager, Member member)
+    {
+        manager.getScheduler().shuffle();
+
+        if (manager.getChannel() == null) return;
+        EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has shuffled the player.");
     }
 
     public void cleanupPlayers()
@@ -146,17 +191,24 @@ public class MusicModule extends Module
         });
     }
 
-    public void cleanupPlayer(Guild guild)
+    public void cleanupPlayer(Guild guild, String reason)
     {
         GuildMusicManager manager = musicHandlers.get(guild.getIdLong());
 
         if (manager == null) return;
+
+        MessageChannel channel = manager.getChannel();
 
         manager.removeOldController();
         manager.getPlayer().destroy();
         manager.leave(guild);
         manager.getScheduler().clear();
         manager.unbind();
+
+        if (channel != null)
+        {
+            EmbedUtils.sendError(channel, reason);
+        }
     }
 
     public boolean isUserDj(CommandEvent event)
@@ -302,10 +354,15 @@ public class MusicModule extends Module
     @Override
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
     {
-        long humansInVC = event.getChannelLeft().getMembers().stream().filter(member -> !member.getUser().isBot()).count();
-        if (event.getMember().equals(event.getGuild().getSelfMember()) || humansInVC == 0)
+        if (event.getMember().equals(event.getGuild().getSelfMember()))
         {
-           cleanupPlayer(event.getGuild());
+            cleanupPlayer(event.getGuild(), "Disconnected due to being kicked.");
+        }
+
+        long humansInVC = event.getChannelLeft().getMembers().stream().filter(member -> !member.getUser().isBot()).count();
+        if (humansInVC == 0)
+        {
+           cleanupPlayer(event.getGuild(), "Disconnected due to empty voice channel.");
         }
     }
 
@@ -313,9 +370,9 @@ public class MusicModule extends Module
     public void onGuildVoiceMove(GuildVoiceMoveEvent event)
     {
         long humansInVC = event.getChannelLeft().getMembers().stream().filter(member -> !member.getUser().isBot()).count();
-        if (event.getMember().equals(event.getGuild().getSelfMember()) || humansInVC == 0)
+        if (humansInVC == 0)
         {
-            cleanupPlayer(event.getGuild());
+            cleanupPlayer(event.getGuild(), "Disconnected due to empty voice channel.");
         }
     }
 }
