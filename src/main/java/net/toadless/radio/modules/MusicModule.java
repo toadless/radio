@@ -198,6 +198,7 @@ public class MusicModule extends Module
                 manager.leave(guild);
                 manager.getScheduler().clear();
                 manager.unbind();
+                this.musicHandlers.remove(manager);
             }
         });
     }
@@ -215,6 +216,7 @@ public class MusicModule extends Module
         manager.leave(guild);
         manager.getScheduler().clear();
         manager.unbind();
+        this.musicHandlers.remove(manager);
 
         if (channel != null)
         {
