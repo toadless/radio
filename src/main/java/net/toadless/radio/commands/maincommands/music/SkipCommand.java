@@ -19,7 +19,7 @@ public class SkipCommand extends Command
     public SkipCommand()
     {
         super("Skip", "Skips the current song.", "[none]");
-        addAliases("skip");
+        addAliases("skip", "next");
         addFlags(CommandFlag.GUILD_ONLY);
     }
 
