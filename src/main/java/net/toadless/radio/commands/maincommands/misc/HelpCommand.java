@@ -1,18 +1,19 @@
 package net.toadless.radio.commands.maincommands.misc;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 import java.util.function.Consumer;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.toadless.radio.Constants;
 import net.toadless.radio.Radio;
 import net.toadless.radio.modules.CommandModule;
+import net.toadless.radio.modules.PaginationModule;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.exception.CommandException;
-import net.toadless.radio.objects.exception.CommandInputException;
-import net.toadless.radio.util.Parser;
+import net.toadless.radio.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings ("unused")
@@ -27,37 +28,69 @@ public class HelpCommand extends Command
     @Override
     public void run(@NotNull List<String> args, @NotNull CommandEvent event, @NotNull Consumer<CommandException> failure)
     {
-        OptionalInt page;
-        if (args.isEmpty())
-        {
-            page = OptionalInt.of(1);
-        }
-        else
+        if (!args.isEmpty())
         {
             Command command = event.getRadio().getModules().get(CommandModule.class).getCommandMap().get(args.get(0));
-            if (command == null)
-            {
-                page = new Parser(args.get(0), event).parseAsUnsignedInt();
-            }
-            else
+            if (command != null)
             {
                 event.sendMessage(generateHelpPerCommand(command, event.getPrefix()));
                 return;
             }
         }
 
+        List<Command> commands = getCommands(event.getRadio());
+        ArrayList<String> pages = new ArrayList<>();
 
-        if (page.isPresent())
+        StringBuilder commandMessage = new StringBuilder()
+                .append("**")
+                .append(commands.size())
+                .append(" ")
+                .append(StringUtils.plurify("command", commands.size()))
+                .append("**\n");
+
+        for(Command cmd: commands)
         {
-            if (page.getAsInt() + 1 > getHelpPages(event.getPrefix(), event.getRadio()).size() + 1)
+            String formattedCommand = new StringBuilder()
+                    .append("`")
+                    .append(cmd.getName())
+                    .append("` - *")
+                    .append(cmd.getDescription())
+                    .append("*\n")
+                    .toString();
+
+            if (commandMessage.length() + formattedCommand.length() >= 2048)
             {
-                failure.accept(new CommandInputException("Page " + args.get(0) + " does not exist."));
-                return;
+                pages.add(commandMessage.toString());
+                commandMessage = new StringBuilder();
             }
 
-            List<EmbedBuilder> pages = getHelpPages(event.getPrefix(), event.getRadio());
-            event.sendMessage(pages.get(page.getAsInt() - 1).setTitle("Help page " + page.getAsInt() + " / " + pages.size()));
+            commandMessage.append(formattedCommand);
         }
+
+        pages.add(commandMessage.toString());
+
+        event.getRadio().getModules().get(PaginationModule.class).create(
+                event.getChannel(),
+                event.getMember().getIdLong(),
+                pages.size(),
+                (page, embedBuilder) -> embedBuilder.setColor(Constants.EMBED_COLOUR)
+                        .setDescription(pages.get(page))
+                        .setTimestamp(Instant.now())
+        );
+    }
+
+    public List<Command> getCommands(Radio radio)
+    {
+        List<Command> commands = new ArrayList<>();
+        for (Command cmd : radio.getModules().get(CommandModule.class).getCommandMap().values())
+        {
+            if (!commands.contains(cmd))
+            {
+                commands.add(cmd);
+            }
+        }
+
+        return commands;
     }
 
     private EmbedBuilder generateHelpPerCommand(Command command, String prefix)
@@ -71,42 +104,6 @@ public class HelpCommand extends Command
             command.getChildren().forEach(
                     child ->
                             result.addField(prefix + command.getAliases().get(0) + " " + child.getName(), child.getDescription() + "\n`Syntax: " + child.getSyntax() + "`", false));
-        }
-        return result;
-    }
-
-    private List<EmbedBuilder> getHelpPages(String prefix, Radio radio)
-    {
-
-        List<EmbedBuilder> result = new ArrayList<>();
-        List<Command> commands = new ArrayList<>();
-        for (Command cmd : radio.getModules().get(CommandModule.class).getCommandMap().values())
-        {
-            if (!commands.contains(cmd))
-            {
-                commands.add(cmd);
-            }
-        }
-
-        EmbedBuilder embedBuilder = new EmbedBuilder();
-        int fieldCount = 0;
-        for (int i = 0; i < commands.size(); i++)
-        {
-            Command cmd = commands.get(i);
-            if (fieldCount < 6)
-            {
-                fieldCount++;
-                embedBuilder.addField(cmd.getName(), cmd.getDescription() + "\n**" + prefix + cmd.getAliases().get(0) + "**`" + cmd.getSyntax() + "`", false);
-                embedBuilder.setColor(Constants.EMBED_COLOUR);
-                embedBuilder.setFooter("<> Optional;  [] Required; {} Maximum Quantity | ");
-            }
-            else
-            {
-                result.add(embedBuilder);
-                embedBuilder = new EmbedBuilder();
-                fieldCount = 0;
-                i--;
-            }
         }
         return result;
     }
