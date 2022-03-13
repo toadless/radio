@@ -19,6 +19,7 @@ public class TrackScheduler extends AudioEventAdapter
 {
     private final AudioPlayer player;
     private final LinkedList<AudioTrack> queue;
+    private final LinkedList<AudioTrack> history;
     private final GuildMusicManager handler;
 
     private boolean loop;
@@ -27,6 +28,7 @@ public class TrackScheduler extends AudioEventAdapter
     {
         this.player = player;
         this.queue = new LinkedList<>();
+        this.history = new LinkedList<>();
         this.handler = handler;
 
         this.loop = false;
@@ -49,8 +51,10 @@ public class TrackScheduler extends AudioEventAdapter
         return queue;
     }
 
-    public void skipOne()
+    public void skipOne(boolean trackEnded)
     {
+        if (!trackEnded) this.history.push(this.player.getPlayingTrack());
+
         synchronized (queue)
         {
             player.startTrack(queue.poll(), false);
@@ -58,13 +62,29 @@ public class TrackScheduler extends AudioEventAdapter
         player.setPaused(false);
     }
 
+    public boolean playPrevious()
+    {
+        if (!hasPrevious()) return false;
+        if (this.player.getPlayingTrack() != null) this.queue.addFirst(this.player.getPlayingTrack().makeClone());
+
+        synchronized (history)
+        {
+            player.startTrack(history.poll().makeClone(), false);
+        }
+        player.setPaused(false);
+
+        return true;
+    }
+
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason)
     {
+        this.history.push(track);
+
         if (endReason.mayStartNext)
         {
             if (loop) player.startTrack(track.makeClone(), false);
-            else skipOne();
+            else skipOne(true);
         }
     }
 
@@ -107,6 +127,11 @@ public class TrackScheduler extends AudioEventAdapter
     public boolean hasNext()
     {
         return queue.peek() != null;
+    }
+
+    public boolean hasPrevious()
+    {
+        return history.peek() != null;
     }
 
     public void clear()

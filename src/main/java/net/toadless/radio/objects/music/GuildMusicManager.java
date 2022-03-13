@@ -80,13 +80,14 @@ public class GuildMusicManager
         {
             setControllerId(message.getIdLong());
 
-            message.addReaction(Emoji.PLAY_PAUSE.getAsReaction()).queue();
-            message.addReaction(Emoji.ARROW_RIGHT.getAsReaction()).queue();
-            message.addReaction(Emoji.VOLUME_UP.getAsReaction()).queue();
-            message.addReaction(Emoji.VOLUME_DOWN.getAsReaction()).queue();
-            message.addReaction(Emoji.SHUFFLE.getAsReaction()).queue();
-            message.addReaction(Emoji.REPEAT.getAsReaction()).queue();
-            message.addReaction(Emoji.CROSS.getAsReaction()).queue();
+            message.addReaction(Emoji.ARROW_LEFT.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.PLAY_PAUSE.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.ARROW_RIGHT.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.VOLUME_UP.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.VOLUME_DOWN.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.SHUFFLE.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.REPEAT.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.CROSS.getAsReaction()).queue(success -> {}, failure -> {});
         }, error ->
         {
             bind(null);

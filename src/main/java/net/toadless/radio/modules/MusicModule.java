@@ -108,6 +108,7 @@ public class MusicModule extends Module
 
         switch(event.getReactionEmote().getAsReactionCode())
         {
+            case "\u2B05\uFE0F" -> previousFromController(manager, member);
             case "\u27A1\uFE0F" -> skipFromController(manager, member);
             case "\u23EF" -> togglePauseFromController(manager, member);
             case "\uD83D\uDD00" -> shuffleFromController(manager, member);
@@ -117,18 +118,28 @@ public class MusicModule extends Module
             case "\u274C" -> cleanupPlayer(event.getGuild(), member.getAsMention() + " disconnected me.");
         }
 
-        if(event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_MANAGE))
+        if (event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_MANAGE))
         {
-            event.getReaction().removeReaction(event.getUser()).queue();
+            event.getReaction().removeReaction(event.getUser()).queue(success -> {}, failure -> {});
         }
     }
 
     private void skipFromController(GuildMusicManager manager, Member member)
     {
-        manager.getScheduler().skipOne();
+        manager.getScheduler().skipOne(false);
 
         if (manager.getChannel() == null) return;
         EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has skipped the track.");
+    }
+
+    private void previousFromController(GuildMusicManager manager, Member member)
+    {
+        boolean previous = manager.getScheduler().playPrevious();
+
+        if (manager.getChannel() == null) return;
+
+        if (previous) EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has skipped to the previous the track.");
+        else EmbedUtils.sendError(manager.getChannel(), member.getAsMention() + ", there is no previous track.");
     }
 
     private void togglePauseFromController(GuildMusicManager manager, Member member)

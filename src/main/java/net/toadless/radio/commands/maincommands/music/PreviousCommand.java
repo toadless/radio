@@ -14,12 +14,12 @@ import net.toadless.radio.util.CommandChecks;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings ("unused")
-public class SkipCommand extends Command
+public class PreviousCommand extends Command
 {
-    public SkipCommand()
+    public PreviousCommand()
     {
-        super("Skip", "Skips the current song.", "[none]");
-        addAliases("skip", "next");
+        super("Previous", "Skips to the previous song.", "[none]");
+        addAliases("previous", "rewind", "last");
         addFlags(CommandFlag.GUILD_ONLY);
     }
 
@@ -33,13 +33,16 @@ public class SkipCommand extends Command
         if (CommandChecks.sharesVoice(event, failure)) return;
         if (CommandChecks.isUserDj(event, failure)) return;
 
-        if (manager.getScheduler().hasNext())
+        if (manager.getScheduler().hasPrevious())
         {
-            manager.getScheduler().skipOne(false);
+            boolean previous = manager.getScheduler().playPrevious();
+
+            if (previous) event.replySuccess("Skipped to the previous track.");
+            else failure.accept(new CommandResultException("An error occurred whilst skipping to the previous track."));
         }
         else
         {
-            failure.accept(new CommandResultException("No more tracks queued."));
+            failure.accept(new CommandResultException("No previous tracks."));
         }
     }
 }
