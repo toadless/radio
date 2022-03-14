@@ -23,7 +23,7 @@ public class WebModule extends Module
     {
         super(radio, modules);
         this.javalin = Javalin
-                .create(JavalinConfig::enableCorsForAllOrigins)
+                .create(JavalinConfig -> { JavalinConfig.showJavalinBanner = false; JavalinConfig.enableCorsForAllOrigins(); })
                 .routes(() ->
                 {
                     path("/shards", () -> get(new ShardsRoute(this)));

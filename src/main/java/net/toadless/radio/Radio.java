@@ -43,6 +43,8 @@ public class Radio extends ListenerAdapter
 
     public Radio()
     {
+        printVanity();
+
         this.logger = LoggerFactory.getLogger(Radio.class);
         this.configuration = new Configuration(this);
         this.okHttpClient = new OkHttpClient();
@@ -107,17 +109,38 @@ public class Radio extends ListenerAdapter
                 .build();
     }
 
+    private void printVanity()
+    {
+        String vanity =
+                """
+                                                   dddddddd                        \s
+                                                   d::::::d  iiii                  \s
+                                                   d::::::d i::::i                 \s
+                                                   d::::::d  iiii                  \s
+                                                   d:::::d                         \s
+    rrrrr   rrrrrrrrr   aaaaaaaaaaaaa      ddddddddd:::::d iiiiiii    ooooooooooo  \s
+    r::::rrr:::::::::r  a::::::::::::a   dd::::::::::::::d i:::::i  oo:::::::::::oo\s
+    r:::::::::::::::::r aaaaaaaaa:::::a d::::::::::::::::d  i::::i o:::::::::::::::o
+    rr::::::rrrrr::::::r         a::::ad:::::::ddddd:::::d  i::::i o:::::ooooo:::::o
+     r:::::r     r:::::r  aaaaaaa:::::ad::::::d    d:::::d  i::::i o::::o     o::::o
+     r:::::r     rrrrrrraa::::::::::::ad:::::d     d:::::d  i::::i o::::o     o::::o
+     r:::::r           a::::aaaa::::::ad:::::d     d:::::d  i::::i o::::o     o::::o
+     r:::::r          a::::a    a:::::ad:::::d     d:::::d  i::::i o::::o     o::::o
+     r:::::r          a::::a    a:::::ad::::::ddddd::::::ddi::::::io:::::ooooo:::::o
+     r:::::r          a:::::aaaa::::::a d:::::::::::::::::di::::::io:::::::::::::::o
+     r:::::r           a::::::::::aa:::a d:::::::::ddd::::di::::::i oo:::::::::::oo\s
+     rrrrrrr            aaaaaaaaaa  aaaa  ddddddddd   dddddiiiiiiii   ooooooooooo  \s
+                                                                                   """;
+
+        System.out.println(vanity);
+    }
+
     @Override
     public void onReady(ReadyEvent event)
     {
         registerGuilds(event.getJDA().getShardManager());
         switchStatus(event.getJDA());
 
-        getLogger().info("  ___      _     ___ _            _          _ _ ");
-        getLogger().info(" | _ ) ___| |_  / __| |_ __ _ _ _| |_ ___ __| | |");
-        getLogger().info(" | _ \\/ _ \\  _| \\__ \\  _/ _` | '_|  _/ -_) _` |_|");
-        getLogger().info(" |___/\\___/\\__| |___/\\__\\__,_|_|  \\__\\___\\__,_(_)");
-        getLogger().info("");
         getLogger().info("Account:         " + event.getJDA().getSelfUser().getAsTag() + " / " + event.getJDA().getSelfUser().getId());
         getLogger().info("Total Shards:    " + BotInfo.getTotalShards(event.getJDA().getShardManager()));
         getLogger().info("Total Guilds:    " + BotInfo.getGuildCount(event.getJDA().getShardManager()));

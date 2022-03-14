@@ -35,6 +35,7 @@ public class DatabaseModule extends Module
         this.pool = initHikari();
         initTables();
         System.getProperties().setProperty("org.jooq.no-logo", "true");
+        System.getProperties().setProperty("org.jooq.no-tips", "true");
     }
 
     private void initTables()
