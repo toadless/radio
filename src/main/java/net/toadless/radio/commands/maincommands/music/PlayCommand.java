@@ -21,7 +21,7 @@ public class PlayCommand extends Command
     public PlayCommand()
     {
         super("Play", "Plays music from Youtube, or Spotify.", "[song]");
-        addAliases("play");
+        addAliases("play", "p");
         addFlags(CommandFlag.GUILD_ONLY);
     }
 

@@ -375,7 +375,7 @@ public class MusicModule extends Module
         long humansInVC = event.getChannelLeft().getMembers().stream().filter(member -> !member.getUser().isBot()).count();
         if (humansInVC == 0)
         {
-           cleanupPlayer(event.getGuild(), "Disconnected due to empty voice channel.");
+           cleanupPlayer(event.getGuild(), "Disconnected due to inactivity.");
         }
     }
 
@@ -385,7 +385,7 @@ public class MusicModule extends Module
         long humansInVC = event.getChannelLeft().getMembers().stream().filter(member -> !member.getUser().isBot()).count();
         if (humansInVC == 0)
         {
-            cleanupPlayer(event.getGuild(), "Disconnected due to empty voice channel.");
+            cleanupPlayer(event.getGuild(), "Disconnected due to inactivity.");
         }
     }
 }
