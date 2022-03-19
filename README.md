@@ -1,6 +1,6 @@
 # Radio
 
-[![](https://discordapp.com/api/guilds/925386927794958348/embed.png?style=banner2)](https://discord.gg/JtXmRKuGGp)
+[![](https://discordapp.com/api/guilds/954456505334263828/embed.png?style=banner2)](https://discord.gg/8Nkgxg25Xw)
 
 Radio is a private Discord bot for playing music, it is highly powerful and configurable. Radio is built to feel like a premium experience.
 
