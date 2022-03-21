@@ -41,7 +41,7 @@ dependencies {
 
     //Web
     implementation ("org.jsoup:jsoup:1.14.3")
-    implementation ("io.javalin:javalin:4.3.0")
+    implementation ("io.javalin:javalin:4.4.0")
 
     //Discord
     implementation ("net.dv8tion:JDA:4.4.0_352")
