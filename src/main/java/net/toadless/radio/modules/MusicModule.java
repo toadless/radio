@@ -21,7 +21,6 @@ import net.toadless.radio.objects.module.Module;
 import net.toadless.radio.objects.module.Modules;
 import net.toadless.radio.objects.music.GuildMusicManager;
 import net.toadless.radio.objects.music.SearchEngine;
-import net.toadless.radio.objects.music.TrackScheduler;
 import net.toadless.radio.util.EmbedUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -84,7 +83,6 @@ public class MusicModule extends Module
             return;
         }
 
-        TrackScheduler scheduler = manager.getScheduler();
         Member member = event.getMember();
 
         GuildVoiceState voiceState = member.getVoiceState();
@@ -188,7 +186,7 @@ public class MusicModule extends Module
             VoiceChannel vc = guild.getAudioManager().getConnectedChannel();
             if (vc == null)
             {
-                return; // if we arent connected theres no point in checking.
+                return; // if we aren't connected there's no point in checking.
             }
 
             long humansInVC = vc.getMembers().stream().filter(member -> !member.getUser().isBot()).count();
@@ -198,7 +196,7 @@ public class MusicModule extends Module
                 manager.leave(guild);
                 manager.getScheduler().clear();
                 manager.unbind();
-                this.musicHandlers.remove(manager);
+                this.musicHandlers.remove(guild.getIdLong());
             }
         });
     }
@@ -216,7 +214,7 @@ public class MusicModule extends Module
         manager.leave(guild);
         manager.getScheduler().clear();
         manager.unbind();
-        this.musicHandlers.remove(manager);
+        this.musicHandlers.remove(guild.getIdLong());
 
         if (channel != null)
         {

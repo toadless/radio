@@ -4,16 +4,12 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 
-import java.time.Instant;
 import java.util.List;
 import javax.annotation.Nullable;
 
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.managers.AudioManager;
-import net.toadless.radio.Constants;
 import net.toadless.radio.objects.Emoji;
-import net.toadless.radio.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class GuildMusicManager

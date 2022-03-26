@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.toadless.radio.modules.CommandModule;
+import net.toadless.radio.modules.MusicModule;
 import net.toadless.radio.modules.WebModule;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +28,7 @@ public class InfoRoute implements Handler
         webModule.ok(ctx, DataObject.empty()
                 .put("shards", shardManager.getShardCache().size())
                 .put("guilds", shardManager.getGuildCache().size())
+                .put("players", webModule.getRadio().getModules().get(MusicModule.class).getPlayers())
                 .put("users", shardManager.getGuildCache().applyStream(guildStream -> guildStream.mapToInt(Guild::getMemberCount).sum()))
                 .put("jda_version", JDAInfo.VERSION)
                 .put("commands", webModule.getRadio().getModules().get(CommandModule.class).getCommandMap().values().stream().distinct().count())

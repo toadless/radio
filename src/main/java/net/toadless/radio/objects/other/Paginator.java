@@ -1,6 +1,5 @@
 package net.toadless.radio.objects.other;
 
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;

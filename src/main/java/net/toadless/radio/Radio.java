@@ -19,7 +19,6 @@ import net.toadless.radio.objects.bot.EventWaiter;
 import net.toadless.radio.objects.info.BotInfo;
 import net.toadless.radio.objects.module.Modules;
 import net.toadless.radio.util.DatabaseUtils;
-import net.toadless.radio.util.StringUtils;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
