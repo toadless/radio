@@ -28,7 +28,7 @@ public class InfoCommand extends Command
                 .setTitle(event.getJDA().getSelfUser().getName() + " information")
                 .addField("JVM Version", BotInfo.getJavaVersion(), true)
                 .addField("JDA Version", BotInfo.getJDAVersion(), true)
-                .addField("Monke Version", Constants.VERSION, true)
+                .addField("Radio Version", Constants.VERSION, true)
 
                 .addField("Thread Count", String.valueOf(BotInfo.getThreadCount()), true)
                 .addField("Memory Usage", BotInfo.getMemoryFormatted() + " [" + BotInfo.getMemoryPercent() + "%]", true)
