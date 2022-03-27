@@ -24,7 +24,6 @@ import net.toadless.radio.objects.music.SearchEngine;
 import net.toadless.radio.util.EmbedUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -69,7 +68,7 @@ public class MusicModule extends Module
 
         playerManager.getConfiguration().setFilterHotSwapEnabled(true); // hotswap for the filters
 
-        this.modules.addTask(this::cleanupPlayers, TimeUnit.MINUTES, 1);
+        this.modules.addRepeatingTask(this::cleanupPlayers, TimeUnit.MINUTES, 1);
     }
 
     public GuildMusicManager getGuildMusicManager(Guild guild)
@@ -373,11 +372,13 @@ public class MusicModule extends Module
             @Override
             public void noMatches()
             {
+                // i should prob do stuff here
             }
 
             @Override
             public void loadFailed(FriendlyException exception)
             {
+                // i should prob do stuff here
             }
         });
     }
