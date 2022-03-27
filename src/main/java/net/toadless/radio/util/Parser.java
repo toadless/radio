@@ -130,6 +130,25 @@ public class Parser
         }
     }
 
+    public OptionalInt parseAsUnsignedIntWithZero()
+    {
+        try
+        {
+            OptionalInt value = OptionalInt.of(Integer.parseUnsignedInt(arg));
+            if (value.getAsInt() <= -1)
+            {
+                event.replyError("Enter a whole number greater than -1, eg: 0");
+                return OptionalInt.empty();
+            }
+            return value;
+        }
+        catch (NumberFormatException exception)
+        {
+            event.replyError("Enter a whole number greater than -1, eg: 0");
+            return OptionalInt.empty();
+        }
+    }
+
     public void parseAsTextChannel(Consumer<TextChannel> consumer)
     {
         parseAsMentionable(mentionable -> consumer.accept((TextChannel) mentionable), Message.MentionType.CHANNEL);

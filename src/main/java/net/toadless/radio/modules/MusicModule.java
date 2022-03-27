@@ -24,6 +24,7 @@ import net.toadless.radio.objects.music.SearchEngine;
 import net.toadless.radio.util.EmbedUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +37,24 @@ public class MusicModule extends Module
     public static final Pattern URL_PATTERN = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]?");
     public static final Pattern SPOTIFY_URL_PATTERN = Pattern.compile("^(https?://)?(www\\.)?open\\.spotify\\.com/(user/[a-zA-Z0-9-_]+/)?(?<type>track|album|artist|playlist)/(?<identifier>[a-zA-Z0-9-_]+)?.+");
 
+    public static final float[] BASS_BOOST = {
+            0.2f,
+            0.15f,
+            0.1f,
+            0.05f,
+            0.0f,
+            -0.05f,
+            -0.1f,
+            -0.1f,
+            -0.1f,
+            -0.1f,
+            -0.1f,
+            -0.1f,
+            -0.1f,
+            -0.1f,
+            -0.1f
+    };
+
     private final Map<Long, GuildMusicManager> musicHandlers;
     private final AudioPlayerManager playerManager;
 
@@ -47,6 +66,8 @@ public class MusicModule extends Module
 
         AudioSourceManagers.registerLocalSource(playerManager);
         AudioSourceManagers.registerRemoteSources(playerManager);
+
+        playerManager.getConfiguration().setFilterHotSwapEnabled(true); // hotswap for the filters
 
         this.modules.addTask(this::cleanupPlayers, TimeUnit.MINUTES, 1);
     }

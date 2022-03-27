@@ -1,5 +1,6 @@
 package net.toadless.radio.objects.music;
 
+import com.sedmelluq.discord.lavaplayer.filter.equalizer.EqualizerFactory;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
@@ -10,10 +11,13 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.toadless.radio.Constants;
 import net.toadless.radio.util.StringUtils;
+
+import static net.toadless.radio.modules.MusicModule.BASS_BOOST;
 
 public class TrackScheduler extends AudioEventAdapter
 {
@@ -22,7 +26,10 @@ public class TrackScheduler extends AudioEventAdapter
     private final LinkedList<AudioTrack> history;
     private final GuildMusicManager handler;
 
+    private final EqualizerFactory equalizer;
+
     private boolean loop;
+    private float bassBoostPercentage;
 
     public TrackScheduler(AudioPlayer player, GuildMusicManager handler)
     {
@@ -30,8 +37,14 @@ public class TrackScheduler extends AudioEventAdapter
         this.queue = new LinkedList<>();
         this.history = new LinkedList<>();
         this.handler = handler;
+        this.equalizer = new EqualizerFactory();
 
         this.loop = false;
+
+        this.player.setFilterFactory(equalizer);
+        this.player.setFrameBufferDuration(500); // prevent bass boost taking time to take effect
+
+        this.bassBoostPercentage = 0.00f;
     }
 
     public void queue(AudioTrack track, User user)
@@ -49,6 +62,18 @@ public class TrackScheduler extends AudioEventAdapter
     public List<AudioTrack> getQueue()
     {
         return queue;
+    }
+
+    public void bassBoost(float percentage)
+    {
+        this.bassBoostPercentage = percentage;
+
+        final float multiplier = percentage / 100.00f;
+
+        for (int i = 0; i < BASS_BOOST.length; i++)
+        {
+            equalizer.setGain(i, BASS_BOOST[i] * multiplier);
+        }
     }
 
     public void skipOne(boolean trackEnded)
@@ -152,5 +177,10 @@ public class TrackScheduler extends AudioEventAdapter
     public boolean getLoop()
     {
         return this.loop;
+    }
+
+    public float getBassBoostPercentage()
+    {
+        return this.bassBoostPercentage;
     }
 }
