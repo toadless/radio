@@ -329,7 +329,6 @@ public class MusicModule extends Module
             @Override
             public void loadFailed(FriendlyException exception)
             {
-                System.out.println(exception);
                 failure.accept(new CommandResultException("An error occurred while loading the song."));
             }
         });
