@@ -23,7 +23,7 @@ public class WebModule extends Module
     {
         super(radio, modules);
         this.javalin = Javalin
-                .create(JavalinConfig -> { JavalinConfig.showJavalinBanner = false; JavalinConfig.enableCorsForAllOrigins(); })
+                .create(this::setJavalinConfig)
                 .routes(() ->
                 {
                     path("/shards", () -> get(new ShardsRoute(this)));
@@ -59,5 +59,11 @@ public class WebModule extends Module
         ctx.header("Content-Type", "application/json");
         ctx.status(code);
         ctx.result(data.toString());
+    }
+
+    public void setJavalinConfig(JavalinConfig config)
+    {
+        config.showJavalinBanner = false;
+        config.enableCorsForAllOrigins();
     }
 }
