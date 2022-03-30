@@ -46,9 +46,12 @@ public class SpotifyModule extends Module
 
     private void refreshAccessToken()
     {
+        LOGGER.info("Attempting to update the access token.");
+
         try
         {
             this.spotify.setAccessToken(this.clientCredentialsRequest.execute().getAccessToken());
+            LOGGER.info("Updating the access token succeeded.");
         }
         catch(Exception e)
         {
