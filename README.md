@@ -21,4 +21,4 @@ Maybe. Feel free to submit PRs, but unless they are explicitly bug fixes that ha
 
 ## Can You Add Radio To My Server?
 
-Maybe. If you are interested in having Radio on your server, please join [my server](https://discord.gg/JtXmRKuGGp).
+Maybe. If you are interested in having Radio on your server, please join [my server](https://discord.gg/8Nkgxg25Xw).
