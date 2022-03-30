@@ -45,7 +45,7 @@ dependencies {
 
     //Discord
     implementation ("net.dv8tion:JDA:4.4.0_352")
-    implementation ("com.sedmelluq:lavaplayer:1.3.78")
+    implementation ("com.github.walkyst:lavaplayer-fork:1.3.97")
 
     //Database
     implementation ("org.postgresql:postgresql:42.3.3")
