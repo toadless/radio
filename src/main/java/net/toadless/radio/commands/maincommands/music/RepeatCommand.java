@@ -8,7 +8,6 @@ import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.command.CommandFlag;
 import net.toadless.radio.objects.exception.CommandException;
-import net.toadless.radio.objects.exception.CommandInputException;
 import net.toadless.radio.objects.music.GuildMusicManager;
 import net.toadless.radio.util.CommandChecks;
 import org.jetbrains.annotations.NotNull;
