@@ -1,26 +1,26 @@
-package net.toadless.radio.commands.maincommands.music;
-
-import java.util.List;
-import java.util.function.Consumer;
+package net.toadless.radio.commands.subcommands.repeat;
 
 import net.toadless.radio.modules.MusicModule;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.command.CommandFlag;
 import net.toadless.radio.objects.exception.CommandException;
-import net.toadless.radio.objects.exception.CommandResultException;
 import net.toadless.radio.objects.music.GuildMusicManager;
+import net.toadless.radio.objects.music.RepeatMode;
 import net.toadless.radio.util.CommandChecks;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings ("unused")
-public class SkipCommand extends Command
+import java.util.List;
+import java.util.function.Consumer;
+
+public class RepeatQueueCommand extends Command
 {
-    public SkipCommand()
+
+    public RepeatQueueCommand(Command parent)
     {
-        super("Skip", "Skips the current song.", "[none]");
-        addAliases("skip", "next");
+        super(parent, "Queue", "Sets the repeat mode to queue.", "[none]");
         addFlags(CommandFlag.GUILD_ONLY);
+        addAliases("queue");
     }
 
     @Override
@@ -33,13 +33,7 @@ public class SkipCommand extends Command
         if (CommandChecks.sharesVoice(event, failure)) return;
         if (CommandChecks.isUserDj(event, failure)) return;
 
-        if (manager.getScheduler().hasNext())
-        {
-            manager.getScheduler().skipOne(false, true);
-        }
-        else
-        {
-            failure.accept(new CommandResultException("No more tracks queued."));
-        }
+        manager.getScheduler().setRepeatMode(RepeatMode.QUEUE);
+        event.replySuccess("Set the repeat mode to queue.");
     }
 }

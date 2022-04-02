@@ -28,7 +28,7 @@ public class TrackScheduler extends AudioEventAdapter
 
     private final EqualizerFactory equalizer;
 
-    private boolean loop;
+    private RepeatMode repeatMode;
     private float bassBoostPercentage;
 
     public TrackScheduler(AudioPlayer player, GuildMusicManager handler)
@@ -39,7 +39,7 @@ public class TrackScheduler extends AudioEventAdapter
         this.handler = handler;
         this.equalizer = new EqualizerFactory();
 
-        this.loop = false;
+        this.repeatMode = RepeatMode.OFF;
 
         this.player.setFilterFactory(equalizer);
         this.player.setFrameBufferDuration(500); // prevent bass boost taking time to take effect
@@ -76,9 +76,23 @@ public class TrackScheduler extends AudioEventAdapter
         }
     }
 
-    public void skipOne(boolean trackEnded)
+    public void skipOne(boolean trackEnded, boolean force)
     {
         if (!trackEnded) this.history.push(this.player.getPlayingTrack());
+
+        if (this.repeatMode == RepeatMode.SONG && !force)
+        {
+            this.player.startTrack(this.history.poll().makeClone(), false);
+            return;
+        }
+
+        if (this.repeatMode == RepeatMode.QUEUE)
+        {
+            synchronized (queue)
+            {
+                queue.offer(this.history.poll().makeClone());
+            }
+        }
 
         synchronized (queue)
         {
@@ -106,11 +120,7 @@ public class TrackScheduler extends AudioEventAdapter
     {
         this.history.push(track);
 
-        if (endReason.mayStartNext)
-        {
-            if (loop) player.startTrack(track.makeClone(), false);
-            else skipOne(true);
-        }
+        if (endReason.mayStartNext) skipOne(true, false);
     }
 
     @Override
@@ -169,14 +179,14 @@ public class TrackScheduler extends AudioEventAdapter
         Collections.shuffle(queue);
     }
 
-    public void toggleLoop()
+    public RepeatMode getRepeatMode()
     {
-        this.loop = !this.loop;
+        return this.repeatMode;
     }
 
-    public boolean getLoop()
+    public void setRepeatMode(RepeatMode repeatMode)
     {
-        return this.loop;
+        this.repeatMode = repeatMode;
     }
 
     public float getBassBoostPercentage()

@@ -1,26 +1,26 @@
-package net.toadless.radio.commands.maincommands.music;
+package net.toadless.radio.commands.subcommands.repeat;
 
 import net.toadless.radio.modules.MusicModule;
-import net.toadless.radio.objects.Emoji;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.command.CommandFlag;
 import net.toadless.radio.objects.exception.CommandException;
 import net.toadless.radio.objects.music.GuildMusicManager;
+import net.toadless.radio.objects.music.RepeatMode;
 import net.toadless.radio.util.CommandChecks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class LoopCommand extends Command
+public class RepeatOffCommand extends Command
 {
 
-    public LoopCommand()
+    public RepeatOffCommand(Command parent)
     {
-        super("Loop", "Loops the current song.", "[none]");
-        addAliases("loop", "repeat");
+        super(parent, "Off", "Turns the repeat mode off.", "[none]");
         addFlags(CommandFlag.GUILD_ONLY);
+        addAliases("off", "disabled");
     }
 
     @Override
@@ -33,9 +33,7 @@ public class LoopCommand extends Command
         if (CommandChecks.sharesVoice(event, failure)) return;
         if (CommandChecks.isUserDj(event, failure)) return;
 
-        manager.getScheduler().toggleLoop();
-        boolean loop = manager.getScheduler().getLoop();
-
-        event.replySuccess("Looping " + (loop ? "Enabled" : "Disabled") + " " + Emoji.REPEAT.getAsChat());
+        manager.getScheduler().setRepeatMode(RepeatMode.OFF);
+        event.replySuccess("Set the repeat mode to off.");
     }
 }

@@ -1,26 +1,34 @@
 package net.toadless.radio.commands.maincommands.music;
 
-import java.util.List;
-import java.util.function.Consumer;
-
+import net.toadless.radio.commands.subcommands.repeat.RepeatOffCommand;
+import net.toadless.radio.commands.subcommands.repeat.RepeatQueueCommand;
+import net.toadless.radio.commands.subcommands.repeat.RepeatSongCommand;
 import net.toadless.radio.modules.MusicModule;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.command.CommandFlag;
 import net.toadless.radio.objects.exception.CommandException;
-import net.toadless.radio.objects.exception.CommandResultException;
+import net.toadless.radio.objects.exception.CommandInputException;
 import net.toadless.radio.objects.music.GuildMusicManager;
 import net.toadless.radio.util.CommandChecks;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings ("unused")
-public class SkipCommand extends Command
+import java.util.List;
+import java.util.function.Consumer;
+
+public class RepeatCommand extends Command
 {
-    public SkipCommand()
+
+    public RepeatCommand()
     {
-        super("Skip", "Skips the current song.", "[none]");
-        addAliases("skip", "next");
+        super("Repeat", "Gets and sets the repeat mode of the current song.", "[none]");
+        addAliases("repeat", "loop");
         addFlags(CommandFlag.GUILD_ONLY);
+        addChildren(
+                new RepeatOffCommand(this),
+                new RepeatQueueCommand(this),
+                new RepeatSongCommand(this)
+        );
     }
 
     @Override
@@ -33,13 +41,6 @@ public class SkipCommand extends Command
         if (CommandChecks.sharesVoice(event, failure)) return;
         if (CommandChecks.isUserDj(event, failure)) return;
 
-        if (manager.getScheduler().hasNext())
-        {
-            manager.getScheduler().skipOne(false, true);
-        }
-        else
-        {
-            failure.accept(new CommandResultException("No more tracks queued."));
-        }
+        event.replySuccess("The current repeat mode is " + manager.getScheduler().getRepeatMode().toString().toLowerCase());
     }
 }

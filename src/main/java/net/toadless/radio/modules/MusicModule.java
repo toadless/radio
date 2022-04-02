@@ -20,6 +20,7 @@ import net.toadless.radio.objects.exception.CommandResultException;
 import net.toadless.radio.objects.module.Module;
 import net.toadless.radio.objects.module.Modules;
 import net.toadless.radio.objects.music.GuildMusicManager;
+import net.toadless.radio.objects.music.RepeatMode;
 import net.toadless.radio.objects.music.SearchEngine;
 import net.toadless.radio.util.EmbedUtils;
 import org.jetbrains.annotations.NotNull;
@@ -144,7 +145,7 @@ public class MusicModule extends Module
 
     private void skipFromController(GuildMusicManager manager, Member member)
     {
-        manager.getScheduler().skipOne(false);
+        manager.getScheduler().skipOne(false, true);
 
         if (manager.getChannel() == null) return;
         EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has skipped the track.");
@@ -183,11 +184,30 @@ public class MusicModule extends Module
 
     private void toggleLoopingFromController(GuildMusicManager manager, Member member)
     {
-        manager.getScheduler().toggleLoop();
-        boolean looping = manager.getScheduler().getLoop();
+        RepeatMode repeatMode = manager.getScheduler().getRepeatMode();
+
+        if (repeatMode == RepeatMode.OFF)
+        {
+            manager.getScheduler().setRepeatMode(RepeatMode.SONG);
+        }
+        else if (repeatMode == RepeatMode.SONG)
+        {
+            manager.getScheduler().setRepeatMode(RepeatMode.QUEUE);
+        }
+        else if (repeatMode == RepeatMode.QUEUE)
+        {
+            manager.getScheduler().setRepeatMode(RepeatMode.OFF);
+        }
 
         if (manager.getChannel() == null) return;
-        EmbedUtils.sendSuccess(manager.getChannel(), member.getAsMention() + " has " + (looping ? "enabled" : "disabled") + " looping.");
+
+        EmbedUtils.sendSuccess(
+                manager.getChannel(),
+                member.getAsMention() +
+                        " has set the repeat mode to " +
+                        manager.getScheduler().getRepeatMode().toString().toLowerCase() +
+                        "!"
+                );
     }
 
     private void shuffleFromController(GuildMusicManager manager, Member member)
