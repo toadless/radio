@@ -42,9 +42,10 @@ public class Radio extends ListenerAdapter
 
     public Radio()
     {
+        this.logger = LoggerFactory.getLogger(Radio.class);
+
         printVanity();
 
-        this.logger = LoggerFactory.getLogger(Radio.class);
         this.configuration = new Configuration(this);
         this.okHttpClient = new OkHttpClient();
         this.startTimestamp = LocalDateTime.now();
@@ -131,7 +132,7 @@ public class Radio extends ListenerAdapter
      rrrrrrr            aaaaaaaaaa  aaaa  ddddddddd   dddddiiiiiiii   ooooooooooo  \s
                                                                                    """;
 
-        System.out.println(vanity);
+        logger.info(vanity);
     }
 
     @Override
