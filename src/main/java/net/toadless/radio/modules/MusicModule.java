@@ -22,6 +22,8 @@ import net.toadless.radio.objects.module.Modules;
 import net.toadless.radio.objects.music.GuildMusicManager;
 import net.toadless.radio.objects.music.RepeatMode;
 import net.toadless.radio.objects.music.SearchEngine;
+import net.toadless.radio.objects.music.loaders.DefaultAudioLoader;
+import net.toadless.radio.objects.music.loaders.SilentAudioLoader;
 import net.toadless.radio.util.EmbedUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -301,56 +303,7 @@ public class MusicModule extends Module
             }
         }
 
-        getPlayerManager().loadItemOrdered(manager, query, new AudioLoadResultHandler()
-        {
-            @Override
-            public void trackLoaded(AudioTrack track)
-            {
-                if (manager.isPlaying())
-                {
-                    event.replySuccess("Added **" + track.getInfo().title + "** to the queue.");
-                }
-                manager.play(channel, track, event.getAuthor()); //Safe due to CommandChecks
-            }
-
-            @Override
-            public void playlistLoaded(AudioPlaylist playlist)
-            {
-                try
-                {
-                    if (playlist.isSearchResult())
-                    {
-                        AudioTrack track = playlist.getTracks().get(0);
-                        if (manager.isPlaying())
-                        {
-                            event.replySuccess("Added **" + track.getInfo().title + "** to the queue.");
-                        }
-                        manager.play(channel, track, event.getAuthor()); //Safe due to CommandChecks
-                    }
-                    else
-                    {
-                        event.replySuccess("Added " + playlist.getTracks().size() + " tracks to the queue.");
-                        manager.playAll(channel, playlist.getTracks(), event.getAuthor()); //Safe due to CommandChecks
-                    }
-                }
-                catch (IndexOutOfBoundsException exception)
-                {
-                    failure.accept(new CommandResultException("Couldn't find anything matchsing your query."));
-                }
-            }
-
-            @Override
-            public void noMatches()
-            {
-                failure.accept(new CommandResultException("Couldn't find anything matching your query."));
-            }
-
-            @Override
-            public void loadFailed(FriendlyException exception)
-            {
-                failure.accept(new CommandResultException("An error occurred while loading the song."));
-            }
-        });
+        getPlayerManager().loadItemOrdered(manager, query, new DefaultAudioLoader(manager, failure, event, channel));
     }
 
     public int getPlayers()
@@ -366,41 +319,7 @@ public class MusicModule extends Module
     public void playFromSpotify(CommandEvent event, String query, VoiceChannel channel) // separate method to avoid spamming channel
     {
         GuildMusicManager manager = getGuildMusicManager(event.getGuild());
-        getPlayerManager().loadItemOrdered(manager, query, new AudioLoadResultHandler()
-        {
-            @Override
-            public void trackLoaded(AudioTrack track)
-            {
-                manager.play(channel, track, event.getAuthor()); //Safe due to CommandChecks
-            }
-
-            @Override
-            public void playlistLoaded(AudioPlaylist playlist)
-            {
-                if (playlist.isSearchResult())
-                {
-                    AudioTrack track = playlist.getTracks().get(0);
-                    manager.play(channel, track, event.getAuthor()); //Safe due to CommandChecks
-                }
-                else
-                {
-                    manager.playAll(channel, playlist.getTracks(), event.getAuthor()); //Safe due to CommandChecks
-                }
-
-            }
-
-            @Override
-            public void noMatches()
-            {
-                // i should prob do stuff here
-            }
-
-            @Override
-            public void loadFailed(FriendlyException exception)
-            {
-                // i should prob do stuff here
-            }
-        });
+        getPlayerManager().loadItemOrdered(manager, query, new SilentAudioLoader(manager, event, channel));
     }
 
     @Override
