@@ -14,7 +14,7 @@ import java.util.List;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
-import net.toadless.radio.Constants;
+import net.toadless.radio.main.Constants;
 import net.toadless.radio.util.StringUtils;
 
 import static net.toadless.radio.modules.MusicModule.BASS_BOOST;

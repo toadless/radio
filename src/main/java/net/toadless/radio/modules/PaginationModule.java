@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.jodah.expiringmap.ExpirationPolicy;
 import net.jodah.expiringmap.ExpiringMap;
-import net.toadless.radio.Radio;
+import net.toadless.radio.main.Radio;
 import net.toadless.radio.objects.Emoji;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.module.Module;

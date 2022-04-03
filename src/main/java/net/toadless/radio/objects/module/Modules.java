@@ -3,7 +3,7 @@ package net.toadless.radio.objects.module;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
-import net.toadless.radio.Radio;;
+import net.toadless.radio.main.Radio;;
 import net.toadless.radio.objects.bot.BotTask;
 import net.toadless.radio.objects.exception.ModuleNotFoundException;
 import org.slf4j.Logger;

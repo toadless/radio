@@ -1,4 +1,4 @@
-package net.toadless.radio;
+package net.toadless.radio.main;
 
 import java.awt.*;
 

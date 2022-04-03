@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.toadless.radio.Constants;
-import net.toadless.radio.Radio;
+import net.toadless.radio.main.Constants;
+import net.toadless.radio.main.Radio;
 import net.toadless.radio.modules.CommandModule;
 import net.toadless.radio.modules.PaginationModule;
 import net.toadless.radio.objects.command.Command;

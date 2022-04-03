@@ -6,7 +6,7 @@ import java.util.List;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.requests.RestAction;
-import net.toadless.radio.Radio;
+import net.toadless.radio.main.Radio;
 import net.toadless.radio.objects.cache.GuildSettingsCache;
 import net.toadless.radio.objects.command.CommandEvent;
 

@@ -2,7 +2,7 @@ package net.toadless.radio.util;
 
 import java.sql.Connection;
 import net.dv8tion.jda.api.entities.Guild;
-import net.toadless.radio.Radio;
+import net.toadless.radio.main.Radio;
 import net.toadless.radio.jooq.Tables;
 import net.toadless.radio.jooq.tables.Guilds;
 import net.toadless.radio.modules.DatabaseModule;

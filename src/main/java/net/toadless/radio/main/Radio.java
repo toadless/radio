@@ -1,4 +1,4 @@
-package net.toadless.radio;
+package net.toadless.radio.main;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDAInfo;
@@ -113,6 +113,7 @@ public class Radio extends ListenerAdapter
     {
         String vanity =
                 """
+                                                                                   \n
                                                    dddddddd                        \s
                                                    d::::::d  iiii                  \s
                                                    d::::::d i::::i                 \s
@@ -130,6 +131,7 @@ public class Radio extends ListenerAdapter
      r:::::r          a:::::aaaa::::::a d:::::::::::::::::di::::::io:::::::::::::::o
      r:::::r           a::::::::::aa:::a d:::::::::ddd::::di::::::i oo:::::::::::oo\s
      rrrrrrr            aaaaaaaaaa  aaaa  ddddddddd   dddddiiiiiiii   ooooooooooo  \s
+   ================================================================================\s
                                                                                    """;
 
         logger.info(vanity);

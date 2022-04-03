@@ -5,7 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.UnavailableGuildLeaveEvent;
-import net.toadless.radio.Radio;
+import net.toadless.radio.main.Radio;
 import net.toadless.radio.objects.bot.ConfigOption;
 import net.toadless.radio.objects.bot.Configuration;
 import net.toadless.radio.objects.cache.GuildSettingsCache;
