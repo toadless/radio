@@ -79,8 +79,8 @@ public class GuildMusicManager
             message.addReaction(Emoji.ARROW_LEFT.getAsReaction()).queue(success -> {}, failure -> {});
             message.addReaction(Emoji.PLAY_PAUSE.getAsReaction()).queue(success -> {}, failure -> {});
             message.addReaction(Emoji.ARROW_RIGHT.getAsReaction()).queue(success -> {}, failure -> {});
-            message.addReaction(Emoji.VOLUME_UP.getAsReaction()).queue(success -> {}, failure -> {});
             message.addReaction(Emoji.VOLUME_DOWN.getAsReaction()).queue(success -> {}, failure -> {});
+            message.addReaction(Emoji.VOLUME_UP.getAsReaction()).queue(success -> {}, failure -> {});
             message.addReaction(Emoji.SHUFFLE.getAsReaction()).queue(success -> {}, failure -> {});
             message.addReaction(Emoji.REPEAT.getAsReaction()).queue(success -> {}, failure -> {});
             message.addReaction(Emoji.CROSS.getAsReaction()).queue(success -> {}, failure -> {});
