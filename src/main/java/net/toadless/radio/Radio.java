@@ -43,9 +43,6 @@ public class Radio extends ListenerAdapter
     public Radio()
     {
         this.logger = LoggerFactory.getLogger(Radio.class);
-
-        printVanity();
-
         this.configuration = new Configuration(this);
         this.okHttpClient = new OkHttpClient();
         this.startTimestamp = LocalDateTime.now();
@@ -107,34 +104,6 @@ public class Radio extends ListenerAdapter
                 .setActivity(Activity.playing(" loading."))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();
-    }
-
-    private void printVanity()
-    {
-        String vanity =
-                """
-                                                                                   \n
-                                                   dddddddd                        \s
-                                                   d::::::d  iiii                  \s
-                                                   d::::::d i::::i                 \s
-                                                   d::::::d  iiii                  \s
-                                                   d:::::d                         \s
-    rrrrr   rrrrrrrrr   aaaaaaaaaaaaa      ddddddddd:::::d iiiiiii    ooooooooooo  \s
-    r::::rrr:::::::::r  a::::::::::::a   dd::::::::::::::d i:::::i  oo:::::::::::oo\s
-    r:::::::::::::::::r aaaaaaaaa:::::a d::::::::::::::::d  i::::i o:::::::::::::::o
-    rr::::::rrrrr::::::r         a::::ad:::::::ddddd:::::d  i::::i o:::::ooooo:::::o
-     r:::::r     r:::::r  aaaaaaa:::::ad::::::d    d:::::d  i::::i o::::o     o::::o
-     r:::::r     rrrrrrraa::::::::::::ad:::::d     d:::::d  i::::i o::::o     o::::o
-     r:::::r           a::::aaaa::::::ad:::::d     d:::::d  i::::i o::::o     o::::o
-     r:::::r          a::::a    a:::::ad:::::d     d:::::d  i::::i o::::o     o::::o
-     r:::::r          a::::a    a:::::ad::::::ddddd::::::ddi::::::io:::::ooooo:::::o
-     r:::::r          a:::::aaaa::::::a d:::::::::::::::::di::::::io:::::::::::::::o
-     r:::::r           a::::::::::aa:::a d:::::::::ddd::::di::::::i oo:::::::::::oo\s
-     rrrrrrr            aaaaaaaaaa  aaaa  ddddddddd   dddddiiiiiiii   ooooooooooo  \s
-   ================================================================================\s
-                                                                                   """;
-
-        logger.info(vanity);
     }
 
     @Override
