@@ -1,7 +1,7 @@
 package net.toadless.radio.modules;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.toadless.radio.main.Radio;
+import net.toadless.radio.Radio;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.module.Module;
 import net.toadless.radio.objects.module.Modules;

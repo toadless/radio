@@ -4,7 +4,7 @@ import io.javalin.Javalin;
 import io.javalin.core.JavalinConfig;
 import io.javalin.http.Context;
 import net.dv8tion.jda.api.utils.data.DataObject;
-import net.toadless.radio.main.Radio;
+import net.toadless.radio.Radio;
 import net.toadless.radio.objects.module.Module;
 import net.toadless.radio.objects.module.Modules;
 import net.toadless.radio.web.info.InfoRoute;

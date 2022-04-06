@@ -1,5 +1,6 @@
 package net.toadless.radio.modules;
 
+import com.sedmelluq.discord.lavaplayer.natives.ConnectorNativeLibLoader;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
@@ -8,7 +9,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.toadless.radio.main.Radio;
+import net.toadless.radio.Radio;
 import net.toadless.radio.objects.cache.GuildSettingsCache;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.exception.CommandException;
@@ -67,6 +68,8 @@ public class MusicModule extends Module
         playerManager.getConfiguration().setFilterHotSwapEnabled(true); // hotswap for the filters
 
         this.modules.addRepeatingTask(this::cleanupPlayers, TimeUnit.MINUTES, 1);
+
+        ConnectorNativeLibLoader.loadConnectorLibrary();
     }
 
     public GuildMusicManager getGuildMusicManager(Guild guild)

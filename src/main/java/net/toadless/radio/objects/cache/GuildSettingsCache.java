@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import net.toadless.radio.main.Radio;
+import net.toadless.radio.Radio;
 import net.jodah.expiringmap.ExpirationPolicy;
 import net.jodah.expiringmap.ExpiringMap;
 import net.toadless.radio.modules.DatabaseModule;

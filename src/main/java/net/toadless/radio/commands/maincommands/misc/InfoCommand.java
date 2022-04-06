@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
-import net.toadless.radio.main.Constants;
+import net.toadless.radio.Constants;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
 import net.toadless.radio.objects.exception.CommandException;

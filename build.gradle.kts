@@ -11,7 +11,7 @@ plugins {
     id ("nu.studer.jooq") version ("7.1.1")
 }
 
-val mainClassName = "net.toadless.radio.main.Main"
+val mainClassName = "net.toadless.radio.Main"
 
 val RADIO_DB_USER: String by project
 val RADIO_DB_PASSWORD: String by project

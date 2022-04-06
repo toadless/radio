@@ -1,4 +1,4 @@
-package net.toadless.radio.main;
+package net.toadless.radio;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDAInfo;

@@ -1,4 +1,4 @@
-package net.toadless.radio.main;
+package net.toadless.radio;
 
 import javax.security.auth.login.LoginException;
 import org.slf4j.Logger;

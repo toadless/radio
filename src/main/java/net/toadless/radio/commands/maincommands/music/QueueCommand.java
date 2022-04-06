@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import net.dv8tion.jda.api.entities.User;
-import net.toadless.radio.main.Constants;
+import net.toadless.radio.Constants;
 import net.toadless.radio.modules.PaginationModule;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;

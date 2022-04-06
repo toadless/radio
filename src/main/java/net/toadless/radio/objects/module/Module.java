@@ -1,7 +1,7 @@
 package net.toadless.radio.objects.module;
 
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.toadless.radio.main.Radio;
+import net.toadless.radio.Radio;
 
 public class Module extends ListenerAdapter
 {
