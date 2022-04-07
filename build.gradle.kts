@@ -49,7 +49,7 @@ dependencies {
 
     //Database
     implementation ("org.postgresql:postgresql:42.3.3")
-    jooqGenerator ("org.postgresql:postgresql:42.3.2")
+    jooqGenerator ("org.postgresql:postgresql:42.3.3")
 
     implementation ("com.zaxxer:HikariCP:5.0.1")
     implementation ("org.jooq:jooq:3.16.5")
