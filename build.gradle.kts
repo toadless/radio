@@ -37,7 +37,7 @@ dependencies {
     implementation ("io.github.classgraph:classgraph:4.8.143")
     implementation ("ch.qos.logback:logback-classic:1.2.11")
     implementation ("net.jodah:expiringmap:0.5.10")
-    implementation ("se.michaelthelin.spotify:spotify-web-api-java:7.0.0")
+    implementation ("se.michaelthelin.spotify:spotify-web-api-java:7.0.1")
 
     //Web
     implementation ("org.jsoup:jsoup:1.14.3")
