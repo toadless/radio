@@ -43,6 +43,9 @@ dependencies {
     implementation ("org.jsoup:jsoup:1.14.3")
     implementation ("io.javalin:javalin:4.4.0")
 
+    //Eval
+    implementation ("org.codehaus.groovy:groovy-jsr223:3.0.10")
+
     //Discord
     implementation ("net.dv8tion:JDA:4.4.0_352")
     implementation ("com.github.walkyst:lavaplayer-fork:1.3.97")
