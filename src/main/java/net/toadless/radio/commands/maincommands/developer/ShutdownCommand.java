@@ -29,7 +29,7 @@ public class ShutdownCommand extends Command
         event.getJDA().getGuilds().forEach(guild -> event.getRadio().getModules().get(MusicModule.class).getGuildMusicManager(guild).kill(guild));
         event.getJDA().shutdown();
 
-        event.getRadio().getLogger().warn("-- Quack was shutdown using shutdown command.");
+        event.getRadio().getLogger().warn("-- Radio was shutdown using shutdown command.");
         event.getRadio().getLogger().warn("-- Issued by: " + event.getAuthor().getAsTag());
         if (event.isFromGuild())
         {
