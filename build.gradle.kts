@@ -34,7 +34,7 @@ dependencies {
 
     //Misc / Util
     implementation ("info.debatty:java-string-similarity:2.0.0")
-    implementation ("io.github.classgraph:classgraph:4.8.143")
+    implementation ("io.github.classgraph:classgraph:4.8.146")
     implementation ("ch.qos.logback:logback-classic:1.2.11")
     implementation ("net.jodah:expiringmap:0.5.10")
     implementation ("se.michaelthelin.spotify:spotify-web-api-java:7.0.1")
@@ -52,11 +52,11 @@ dependencies {
     implementation ("com.github.walkyst:lavaplayer-fork:1.3.97")
 
     //Database
-    implementation ("org.postgresql:postgresql:42.3.3")
+    implementation ("org.postgresql:postgresql:42.3.4")
     jooqGenerator ("org.postgresql:postgresql:42.3.3")
 
     implementation ("com.zaxxer:HikariCP:5.0.1")
-    implementation ("org.jooq:jooq:3.16.5")
+    implementation ("org.jooq:jooq:3.16.6")
 }
 
 jooq {
