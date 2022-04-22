@@ -93,13 +93,13 @@ public class MusicModule extends Module
     @Override
     public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event)
     {
-        if(event.getUserIdLong() == event.getJDA().getSelfUser().getIdLong())
+        if (event.getUserIdLong() == event.getJDA().getSelfUser().getIdLong())
         {
             return;
         }
 
         GuildMusicManager manager = this.musicHandlers.get(event.getGuild().getIdLong());
-        if(manager == null)
+        if (manager == null)
         {
             return;
         }
@@ -107,14 +107,14 @@ public class MusicModule extends Module
         Member member = event.getMember();
 
         GuildVoiceState voiceState = member.getVoiceState();
-        if(voiceState == null || voiceState.getChannel() == null || voiceState.getChannel().getIdLong() != voiceState.getChannel().getIdLong())
+        if (voiceState == null || voiceState.getChannel() == null || voiceState.getChannel().getIdLong() != voiceState.getChannel().getIdLong())
         {
             return;
         }
 
         long messageId = event.getMessageIdLong();
 
-        if(messageId != manager.getControllerId())
+        if (messageId != manager.getControllerId())
         {
             return;
         }
@@ -125,7 +125,7 @@ public class MusicModule extends Module
             return;
         }
 
-        switch(event.getReactionEmote().getAsReactionCode())
+        switch (event.getReactionEmote().getAsReactionCode())
         {
             case "\u2B05\uFE0F" -> previousFromController(manager, member);
             case "\u27A1\uFE0F" -> skipFromController(manager, member);
