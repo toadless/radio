@@ -21,3 +21,6 @@ bot.cfg
 build/
 .gradle
 gradle.properties
+
+#os files
+.DS_Store

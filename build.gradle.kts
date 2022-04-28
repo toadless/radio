@@ -38,11 +38,11 @@ dependencies {
     implementation ("ch.qos.logback:logback-classic:1.2.11")
     implementation ("net.jodah:expiringmap:0.5.10")
     implementation ("se.michaelthelin.spotify:spotify-web-api-java:7.0.1")
-    implementation ("me.carleslc.Simple-YAML:Simple-Yaml:1.8")
+    implementation ("me.carleslc.Simple-YAML:Simple-Yaml:1.8") // unimplemented
 
     //Web
     implementation ("org.jsoup:jsoup:1.14.3")
-    implementation ("io.javalin:javalin:4.4.0")
+    implementation ("io.javalin:javalin:4.5.0")
 
     //Eval
     implementation ("org.codehaus.groovy:groovy-jsr223:3.0.10")
