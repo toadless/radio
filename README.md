@@ -1,6 +1,18 @@
-# Radio
+![Radio Logo](https://i.imgur.com/6NL5hz2.png)
 
-[![](https://discordapp.com/api/guilds/954456505334263828/embed.png?style=banner2)](https://discord.gg/8Nkgxg25Xw)
+<p align="center">
+    <a href="https://github.com/toadless/radio/blob/main/LICENSE"><img src="https://img.shields.io/github/license/toadless/radio.svg" alt="GitHub License"></a>
+    <a href="https://github.com/toadless/radio/actions/"><img src="https://github.com/toadless/radio/actions/workflows/build.yml/badge.svg" alt="Jenkins"></a>
+    <a href="https://github.com/toadless/radio/issues"><img src="https://img.shields.io/github/issues/toadless/radio.svg?color=purple" alt="GitHub Issues"></a>
+    <a href="https://github.com/toadless/radio/pulls"><img src="https://img.shields.io/github/issues-pr/toadless/radio.svg?color=purple" alt="GitHub Pull Requests"></a>
+    <a href="https://github.com/toadless/radio/network/members"><img src="https://img.shields.io/github/forks/toadless/radio.svg" alt="GitHub Forks"></a>
+    <a href="https://github.com/toadless/radio/stargazers"><img src="https://img.shields.io/github/stars/toadless/radio.svg" alt="GitHub Stars"></a>
+    <a href="https://toadless.net"><img src="https://img.shields.io/website/https/toadless.net.svg?down_color=red&down_message=offline&up_message=online" alt="Website"></a>
+    <br><br>
+    <a href="https://discord.gg/8Nkgxg25Xw"><img src="https://discordapp.com/api/guilds/954456505334263828/widget.png?style=banner2" alt="Discord Server"></a>
+</p>
+
+---
 
 Radio is a private Discord bot for playing music, it is highly powerful and configurable. Radio is built to feel like a premium experience.
 
