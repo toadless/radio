@@ -24,6 +24,7 @@ import net.toadless.radio.util.EmbedUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -323,6 +324,11 @@ public class MusicModule extends Module
     @Override
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
     {
+        if (event.getChannelLeft() != Objects.requireNonNull(Objects.requireNonNull(event.getGuild().getMemberById(event.getJDA().getSelfUser().getIdLong())).getVoiceState()).getChannel())
+        {
+            return;
+        }
+
         if (event.getMember().equals(event.getGuild().getSelfMember()))
         {
             cleanupPlayer(event.getGuild(), "Disconnected due to being kicked.");
@@ -338,6 +344,11 @@ public class MusicModule extends Module
     @Override
     public void onGuildVoiceMove(GuildVoiceMoveEvent event)
     {
+        if (event.getChannelLeft() != Objects.requireNonNull(Objects.requireNonNull(event.getGuild().getMemberById(event.getJDA().getSelfUser().getIdLong())).getVoiceState()).getChannel())
+        {
+            return;
+        }
+
         long humansInVC = event.getChannelLeft().getMembers().stream().filter(member -> !member.getUser().isBot()).count();
         if (humansInVC == 0)
         {
