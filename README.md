@@ -1,4 +1,4 @@
-![Radio Logo](https://i.imgur.com/6NL5hz2.png)
+![Radio Logo](https://i.imgur.com/ZVKqAXV.png)
 
 <p align="center">
     <a href="https://github.com/toadless/radio/blob/main/LICENSE"><img src="https://img.shields.io/github/license/toadless/radio.svg" alt="GitHub License"></a>
@@ -6,6 +6,7 @@
     <a href="https://github.com/toadless/radio/issues"><img src="https://img.shields.io/github/issues/toadless/radio.svg?color=purple" alt="GitHub Issues"></a>
     <a href="https://github.com/toadless/radio/pulls"><img src="https://img.shields.io/github/issues-pr/toadless/radio.svg?color=purple" alt="GitHub Pull Requests"></a>
     <a href="https://github.com/toadless/radio/network/members"><img src="https://img.shields.io/github/forks/toadless/radio.svg" alt="GitHub Forks"></a>
+    <br>
     <a href="https://github.com/toadless/radio/stargazers"><img src="https://img.shields.io/github/stars/toadless/radio.svg" alt="GitHub Stars"></a>
     <a href="https://toadless.net"><img src="https://img.shields.io/website/https/toadless.net.svg?down_color=red&down_message=offline&up_message=online" alt="Website"></a>
     <br><br>
