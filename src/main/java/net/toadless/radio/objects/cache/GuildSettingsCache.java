@@ -106,12 +106,12 @@ public class GuildSettingsCache implements ICache<String, CachedGuildSetting>
 
     public long getDjRole()
     {
-        return cacheGetLong("jdrole", GUILDS.DJ_ROLE);
+        return cacheGetLong("dj_role", GUILDS.DJ_ROLE);
     }
 
     public void setDjRole(@NotNull long newJdRole)
     {
-        cachePut("jdrole", GUILDS.DJ_ROLE, newJdRole);
+        cachePut("dj_role", GUILDS.DJ_ROLE, newJdRole);
     }
 
     public @NotNull String getPrefix()
