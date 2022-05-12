@@ -186,7 +186,7 @@ public class CommandEvent
     public void sendMessage(EmbedBuilder embed)
     {
         addSuccessReaction();
-        getChannel().sendMessage(embed.setColor(Constants.EMBED_COLOUR).setTimestamp(Instant.now()).build()).queue();
+        getChannel().sendMessageEmbeds(embed.setColor(Constants.EMBED_COLOUR).setTimestamp(Instant.now()).build()).queue();
     }
 
     public void sendDeletingMessage(EmbedBuilder embed)
