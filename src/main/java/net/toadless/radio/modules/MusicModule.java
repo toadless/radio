@@ -108,7 +108,7 @@ public class MusicModule extends Module
         Member member = event.getMember();
 
         GuildVoiceState voiceState = member.getVoiceState();
-        if (voiceState == null || voiceState.getChannel() == null || voiceState.getChannel().getIdLong() != voiceState.getChannel().getIdLong())
+        if (voiceState == null || voiceState.getChannel() == null || voiceState.getChannel().getIdLong() != Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(event.getGuild().getMemberById(event.getJDA().getSelfUser().getIdLong())).getVoiceState()).getChannel()).getIdLong())
         {
             return;
         }
@@ -295,11 +295,12 @@ public class MusicModule extends Module
 
         if (!URL_PATTERN.matcher(query).matches())
         {
-            switch(searchEngine)
+            query = switch(searchEngine)
             {
-                case YOUTUBE -> query = "ytsearch:" + query;
-                case SOUNDCLOUD -> query = "scsearch:" + query;
-            }
+                case YOUTUBE -> "ytsearch:" + query;
+                case SOUNDCLOUD -> "scsearch:" + query;
+                default -> null;
+            };
         }
 
         getPlayerManager().loadItemOrdered(manager, query, new DefaultAudioLoader(manager, failure, event, channel));
