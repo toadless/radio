@@ -37,12 +37,12 @@ dependencies {
     implementation ("io.github.classgraph:classgraph:4.8.146")
     implementation ("ch.qos.logback:logback-classic:1.2.11")
     implementation ("net.jodah:expiringmap:0.5.10")
-    implementation ("se.michaelthelin.spotify:spotify-web-api-java:7.0.1")
+    implementation ("se.michaelthelin.spotify:spotify-web-api-java:7.1.0")
     implementation ("me.carleslc.Simple-YAML:Simple-Yaml:1.8") // unimplemented
 
     //Web
-    implementation ("org.jsoup:jsoup:1.14.3")
-    implementation ("io.javalin:javalin:4.5.0")
+    implementation ("org.jsoup:jsoup:1.15.1")
+    implementation ("io.javalin:javalin:4.6.0")
 
     //Eval
     implementation ("org.codehaus.groovy:groovy-jsr223:3.0.10")
@@ -52,8 +52,8 @@ dependencies {
     implementation ("com.github.walkyst:lavaplayer-fork:1.3.97")
 
     //Database
-    implementation ("org.postgresql:postgresql:42.3.4")
-    jooqGenerator ("org.postgresql:postgresql:42.3.3")
+    implementation ("org.postgresql:postgresql:42.3.5")
+    jooqGenerator ("org.postgresql:postgresql:42.3.5")
 
     implementation ("com.zaxxer:HikariCP:5.0.1")
     implementation ("org.jooq:jooq:3.16.6")
