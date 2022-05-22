@@ -52,8 +52,8 @@ dependencies {
     implementation ("com.github.walkyst:lavaplayer-fork:1.3.97")
 
     //Database
-    implementation ("org.postgresql:postgresql:42.3.4")
-    jooqGenerator ("org.postgresql:postgresql:42.3.3")
+    implementation ("org.postgresql:postgresql:42.3.5")
+    jooqGenerator ("org.postgresql:postgresql:42.3.5")
 
     implementation ("com.zaxxer:HikariCP:5.0.1")
     implementation ("org.jooq:jooq:3.16.6")
