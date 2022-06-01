@@ -45,7 +45,7 @@ dependencies {
     implementation ("io.javalin:javalin:4.6.0")
 
     //Eval
-    implementation ("org.codehaus.groovy:groovy-jsr223:3.0.10")
+    implementation ("org.codehaus.groovy:groovy-jsr223:3.0.11")
 
     //Discord
     implementation ("net.dv8tion:JDA:4.4.0_352")
