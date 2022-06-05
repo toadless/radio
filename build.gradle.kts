@@ -34,7 +34,7 @@ dependencies {
 
     //Misc / Util
     implementation ("info.debatty:java-string-similarity:2.0.0")
-    implementation ("io.github.classgraph:classgraph:4.8.146")
+    implementation ("io.github.classgraph:classgraph:4.8.147")
     implementation ("ch.qos.logback:logback-classic:1.2.11")
     implementation ("net.jodah:expiringmap:0.5.10")
     implementation ("se.michaelthelin.spotify:spotify-web-api-java:7.1.0")
@@ -45,14 +45,14 @@ dependencies {
     implementation ("io.javalin:javalin:4.6.0")
 
     //Eval
-    implementation ("org.codehaus.groovy:groovy-jsr223:3.0.10")
+    implementation ("org.codehaus.groovy:groovy-jsr223:3.0.11")
 
     //Discord
     implementation ("net.dv8tion:JDA:4.4.0_352")
     implementation ("com.github.walkyst:lavaplayer-fork:1.3.97")
 
     //Database
-    implementation ("org.postgresql:postgresql:42.3.5")
+    implementation ("org.postgresql:postgresql:42.3.6")
     jooqGenerator ("org.postgresql:postgresql:42.3.5")
 
     implementation ("com.zaxxer:HikariCP:5.0.1")
