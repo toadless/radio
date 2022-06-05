@@ -4,6 +4,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.toadless.radio.modules.MusicModule;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
+import net.toadless.radio.objects.command.CommandFlag;
 import net.toadless.radio.objects.exception.CommandException;
 import net.toadless.radio.objects.exception.CommandResultException;
 import net.toadless.radio.objects.exception.CommandSyntaxException;
@@ -24,6 +25,7 @@ public class SeekCommand extends Command
     {
         super("Seek", "Seeks to the provided position in the currently playing song!", "[Position, Example: 1m 30s]");
         addAliases("seek");
+        addFlags(CommandFlag.GUILD_ONLY);
     }
 
     @Override
