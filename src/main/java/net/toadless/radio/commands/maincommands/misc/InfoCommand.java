@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.toadless.radio.Constants;
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
+import net.toadless.radio.objects.command.CommandFlag;
 import net.toadless.radio.objects.exception.CommandException;
 import net.toadless.radio.objects.info.BotInfo;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +20,7 @@ public class InfoCommand extends Command
     {
         super("bot", "Shows information about the bot.", "[none]");
         addAliases("info");
+        addFlags(CommandFlag.DISABLED);
     }
 
     @Override

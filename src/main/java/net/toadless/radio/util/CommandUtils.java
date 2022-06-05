@@ -22,7 +22,8 @@ public class CommandUtils
         return message.startsWith(GuildSettingsCache.getCache(guildId, radio).getPrefix()) || message.startsWith("<@" + radio.getSelfUser().getId() + ">") || message.startsWith("<@!" + radio.getSelfUser().getId() + ">");
     }
 
-    public static String formatTime(int time){
+    public static String formatTime(int time)
+    {
         return time > 9 ? String.valueOf(time) : "0" + time;
     }
 
