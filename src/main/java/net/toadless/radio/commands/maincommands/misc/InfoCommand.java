@@ -20,7 +20,6 @@ public class InfoCommand extends Command
     {
         super("bot", "Shows information about the bot.", "[none]");
         addAliases("info");
-        addFlags(CommandFlag.DISABLED);
     }
 
     @Override
