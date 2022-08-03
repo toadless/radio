@@ -14,6 +14,7 @@ public class LyricsCommand extends Command
     {
         super("Lyrics", "Fetches the lyrics for the provided song.", "[Song Name]");
         addAliases("lyrics");
+        addFlags(CommandFlag.DISABLED);
     }
 
     @Override
