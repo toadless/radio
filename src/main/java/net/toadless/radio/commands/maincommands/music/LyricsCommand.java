@@ -2,6 +2,7 @@ package net.toadless.radio.commands.maincommands.music;
 
 import net.toadless.radio.objects.command.Command;
 import net.toadless.radio.objects.command.CommandEvent;
+import net.toadless.radio.objects.command.CommandFlag;
 import net.toadless.radio.objects.exception.CommandException;
 import org.jetbrains.annotations.NotNull;
 
